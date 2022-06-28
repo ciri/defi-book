@@ -1,0 +1,102 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%         Solidity
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\lstdefinelanguage{Solidity}{
+	keywords={pragma, solidity, contract, public, private, external, pure, require, typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, contract, export, boolean, throw, implements, import, this, address, mapping, string, memory},
+	ndkeywordstyle=\color{black}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',	
+	morestring=[b]"
+}
+\lstset{ %
+	basewidth={0.5em},
+	basicstyle={\ttfamily\small},
+	breaklines=true,
+	columns=flexible,
+	commentstyle={\color{purple}\textit},
+	emph={Q,Q_c,Q_r,Q_b,Q_d,Q_},
+	emphstyle={\color{blue}\textbf},
+	keepspaces=true,
+	keywordstyle={\color{blue}},
+	language=Solidity,
+	showstringspaces=false,
+	morekeywords={WITH},
+	tabsize=2%
+}
+\renewcommand{\lstlistingname}{Listing}
+\lstset{basicstyle=\ttfamily,breaklines=true}
+\lstset{framextopmargin=50pt,frame=bottomline}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  Annotated python snippets
+%
+% \begin{center}
+%	\begin{annotatecode}
+%	\end{annotatecode}
+%	\begin{codebox}
+%		\begin{lstlisting}[style=pythoncodestyle]
+%		\end{lstlisting}
+%	\end{codebox}
+% \end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fontspec,listings,xcolor,lipsum}
+
+\definecolor{darkgray}{HTML}{404040}
+\definecolor{rulegray}{HTML}{DADADA}
+\definecolor{keywordblue}{HTML}{1F497C}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\lstdefinestyle{pythoncodestyle}{
+	basicstyle=\footnotesize\ttfamily,
+	language=Python,
+	rulecolor=\color{rulegray},
+	keywordstyle=\color{keywordblue},
+	stringstyle=\color{deepgreen},
+	emphstyle=\color{deepred}
+}
+%https://tex.stackexchange.com/questions/210284/how-to-write-pseudocode-similar-to-code-presented-in-beautiful-code-by-j-r-h
+
+\lstnewenvironment{beautifulcode}[1][]{
+	\lstset{
+		language=Python,
+		basicstyle=\footnotesize\ttfamily,
+		%functions
+		moredelim=**[is][\color{keywordblue}]{++}{\ }, 
+		alsoletter={\_},
+        commentstyle=\color{darkgray},
+		%keywords        
+		keywordstyle=\color{deepgreen},        
+		otherkeywords={self,with},             % Add keywords here
+		emph={#1},          % Custom highlighting		
+		emphstyle=\color{keywordblue},    % Custom highlighting style
+		stringstyle=\color{deepred},		
+		%left annotation		
+		frame=l,rulecolor=\color{rulegray},framesep= 1.0em,%disabled for now, but kind of works ...
+		escapechar={\\},
+		escapeinside={(*@}{@*)},		
+		escapebegin={\begin{lrbox}{0}\normalfont\itshape\footnotesize\color{darkgray}},
+		escapeend={\end{lrbox}\llap{\box0\hspace{3.0em}}} %distance of text to left of box
+	}
+	\hspace*{.25\textwidth} %space on left of box
+	\minipage{.73\textwidth}
+}{
+	\endminipage
+}
+
+
+
+%-.08\texwidth, 1.5em /.15/.85

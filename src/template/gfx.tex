@@ -1,0 +1,72 @@
+\usepackage{pdfpages}
+%\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{%
+	every linear axis/.append style={
+		bar width=13pt,%
+		major x tick style = transparent%
+	}
+}
+
+\pgfplotsset{compat=1.8}
+\usepgfplotslibrary{statistics}
+\definecolor{LightGray}{RGB}{120,120,120}
+\definecolor{VeryLightGray}{RGB}{247,247,247}
+% \definecolor{DarkGray}{RGB}{39,40,34}
+\definecolor{DarkGray}{RGB}{0,0,0}
+\definecolor{MonokayBg}{RGB}{39,40,34}
+\definecolor{Tufte}{rgb}{0.7,0.7,0.55}
+\usepackage{tikz}
+\usetikzlibrary{pgfplots.groupplots}
+\usetikzlibrary{positioning,calc,shapes}
+\tikzstyle{every picture}+=[font=\sffamily]
+
+\tikzset{%
+	component/.style={%
+		text=white, fill=LightGray, text width=10em,
+		minimum height=2em, text centered
+	},
+	arrow/.style={thick,->,shorten >=2pt,shorten <=2pt,>=stealth},
+	number/.style={circle,fill=black, text=white, font=\tiny\bfseries, inner sep=0pt, minimum height=1em, anchor=base, text centered},
+	dbscan/.style={%
+		shape=circle,draw, minimum size=25mm
+	},
+	dbscan_circle/.style={%
+		fill=black,minimum size=.5mm
+	},
+	class/.style={%
+		draw,
+		shape=rectangle split,
+		rectangle split parts=3,
+		font=\ttfamily,
+		text width=6cm,
+		rectangle split part align={center,left,left},
+		rectangle split part fill={black, white, white},
+		every text node part/.style={white, font=\sffamily, align=center}
+	},
+	process/.style={%
+	},
+	example/.style={%
+		shape=rectangle split,
+		rectangle split parts=2,
+		font=\rmfamily,
+		text width=.98\textwidth,
+		rectangle split part align={center,left},
+		rectangle split part fill={DarkGray, VeryLightGray},
+		every text node part/.style={white, font=\sffamily, align=left}
+	},
+}
+
+%Caption
+\usepackage{chngcntr}   
+\counterwithout{figure}{chapter} 
+\counterwithout{table}{chapter}
+
+\usepackage{tikz} 
+\usetikzlibrary{bayesnet} 
+
+\newcommand{\htmlimgw}{600}

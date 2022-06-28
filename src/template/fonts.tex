@@ -1,0 +1,161 @@
+%-----------------------------------------------------------------------------%
+% Math
+%-----------------------------------------------------------------------------%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{abraces}
+\usepackage{sansmath}
+
+%-----------------------------------------------------------------------------%
+% Typesetting/fonts
+%-----------------------------------------------------------------------------%
+\usepackage{ragged2e}
+\hyphenation{da-ta-base}
+\usepackage{marginnote}
+\usepackage{pgfplotstable}
+\usepackage{calc}
+\usepackage{blindtext}
+\usepackage{metalogo}
+\usepackage[htt]{hyphenat}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor,colortbl}
+\newcolumntype{a}{>{\columncolor{LightGray!30}}c}
+\usepackage{xspace}
+\usepackage{url}
+\usepackage{acronym}
+
+%Chinese support
+%\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif SC}
+
+\newfontfamily\cjkfont{Noto Serif SC} % requires fontspec
+\usepackage[T1]{fontenc}
+
+%SPECIAL FONTS
+\usepackage{fontspec}
+
+\setmainfont[Ligatures=TeX,
+ BoldFont={Minion Pro Bold}, 
+ ItalicFont={MinionPro-It},
+ BoldItalicFont={MinionPro-SemiboldCnIt}
+]{Minion Pro}
+\setsansfont{Myriad Pro}
+\setmonofont[Scale=MatchLowercase]{Roboto Mono}
+%\setmonofont{Lucida Sans Typewriter}
+
+
+%\newfontfamily\authorfont{Zapfino Linotype One}
+%\newfontfamily\partfont{Alice}
+\newfontfamily\ChapterFont{Gotham Medium}
+\newfontfamily\HeadingsFont{Gotham Medium}
+\newfontfamily\CaptionsFont{Gotham Medium}
+
+% italics
+\let\emph\textit
+
+
+
+
+
+
+\usepackage{enumitem}
+\SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
+\setdescription{leftmargin=1.4\parindent,labelindent=\parindent}
+\usepackage{newverbs}
+\newverbcommand{\bverb}
+{\begin{lrbox}{\verbbox}}
+	{\end{lrbox}\colorbox{gray!30}{\box\verbbox}}
+
+%big letter for first paragraph
+\usepackage{lettrine}
+%  \setcounter{DefaultLines}{1}
+%  \renewcommand{\DefaultLoversize}{0.4}
+%  \setlength{\DefaultNindent}{0em}
+
+
+%hor/ver bar
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+
+%parts that are not part of study material
+\newcommand{\stopextramaterial}{ \color{black} }
+\newcommand{\startextramaterial}{ \color{gray}  }
+
+\usepackage{hyphenat} %for chapter no hypen command
+
+
+
+
+
+% support emojis
+\usepackage{fontspec}
+
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+
+% math font fix
+\usepackage{amsmath,amssymb}
+
+
+% unicode symbol support, we copy these from another font
+% https://emojipedia.org/ for lookup table
+\usepackage{newunicodechar}
+\newfontfamily\EmojiFont{EmojiOne}
+\newfontfamily{\currencies}{FreeSerif}[Scale=MatchUppercase]
+
+\newunicodechar{💡}{{\EmojiFont 💡}}
+\newunicodechar{📝}{{\EmojiFont 📝}}
+\newunicodechar{📋}{{\EmojiFont 📋}}
+\newunicodechar{📌}{{\EmojiFont 📌}}
+\newunicodechar{❗}{{\EmojiFont ❗}}
+\newunicodechar{❓}{{\EmojiFont ❓}}
+\newunicodechar{฿}{{\currencies ฿}}
+\newunicodechar{₲}{{\currencies ₲}}
+\newunicodechar{₮}{{\currencies ₮}} 
+\newunicodechar{Ξ}{{\currencies Ξ}} 
+\newunicodechar{₩}{{\currencies ₩}} 
+\newunicodechar{₳}{{\currencies ₳}} 
+\newunicodechar{₴}{{\currencies ₴}} 
+\newunicodechar{₵}{{\currencies ₵}} 
+\newunicodechar{₭}{{\currencies ₭}} 
+\newunicodechar{₡}{{\currencies ₡}} 
+\newunicodechar{₱}{{\currencies ₱}} 
+\newunicodechar{₸}{{\currencies ₸}} 			
+\newunicodechar{₦}{{\currencies ₦}}
+\newunicodechar{₿}{{\currencies ₿}}
+
+
+% EXAMPLE ENVIRONMENT - not used right no because of lyx
+\let\example\quote
+\let\endexample\quote
+
+%% HYPERREF ---> FOOTNOTE
+%\usepackage{nohyperref} %---> but hyperref is loaded by memoir
+%\renewcommand\href[2]{#2\footnote{#1}}
+
+
+% QUOTE ENVIRONMENT EMBELISHMENTS
+% We disable the original left margin
+\renewenvironment{quote}
+{\small\list{}{\leftmargin=8pt}%%
+		\item\relax}
+{\endlist}
+
+% instead we draw a grey line on the left and add some inner margin
+% it looks nice, but it breaks compilation time because some examples
+% are defined in weird places I think.
+%\usepackage[framemethod=TikZ]{mdframed}
+\surroundwithmdframed[
+linewidth=2pt,
+topline=false,
+innerleftmargin=1pt,
+bottomline=false,
+rightline=false,
+skipabove= 1em,
+skipbelow=\topsep
+]{quote}

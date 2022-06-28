@@ -1,0 +1,5 @@
+#\DeclareLaTeXClass[fancymemoir]{Fancy Memoir}
+Input memoir.layout
+ClassOptions
+  Other "twocolumn"
+End

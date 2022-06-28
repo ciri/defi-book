@@ -1,0 +1,41 @@
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancybox}
+\usepackage{calc}
+\usepackage{graphicx}
+\PassOptionsToPackage{normalem}{ulem}
+\usepackage{ulem}
+\usepackage{float}
+\usepackage[many]{tcolorbox}
+\usepackage{multirow}
+\usepackage{rotating}
+
+
+%command to use after a box to add some more space
+\newcommand{\afterbox}{\vspace{1em}}
+
+
+% Changes tables into tabularx
+% adding the character X to the LaTeX argument input field in the tabular dialog for the respective column(s).
+%% Hack by Heiko Oberdiek (on de.comp.text.tex)
+\usepackage{tabularx}
+
+%% Redefine the standard table
+\let\ORIGtabular\tabular
+\let\ORIGendtabular\endtabular
+\let\ORIGtabularx\tabularx
+\renewcommand*{\tabularx}{%
+	\def\tabular{%
+		\let\endtabular\ORIGendtabular
+		\ORIGtabular
+	}%
+	\ORIGtabularx
+}
+
+\renewcommand{\tabular}{%
+	%% The width of the table. Adjust if needed
+	\tabularx{\linewidth}%
+}
+
+\renewcommand{\endtabular}{\endtabularx} 
