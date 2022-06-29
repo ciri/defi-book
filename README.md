@@ -14,29 +14,29 @@ This book was originally intended as an introductory text for upper undergraduat
 
 The preliminary table-of-contents is as follows:
 
-| Section         | Chapter                            | Readiness |
-| --------------- | ---------------------------------- | --------- |
-| Prologue        |                                    |           |
-| Foundations     | Origins                            |           |
-|                 | Blockchain Technology              |           |
-|                 | Ethereum                           |           |
-| Crypto-Assets   | Introduction to DeFi               |           |
-|                 | Fungible Tokens                    | ✓         |
-|                 | Stablecoins                        |           |
-|                 | Algorithmic Stablecoins            |           |
-|                 | Crowdfunding                       |           |
-| Applications    | Credit Markets                     |           |
-|                 | Automated Market Makers            |           |
-|                 | Liquidity Mining & Yield Farming   |           |
-|                 | Perpetuals                         |           |
-| NFT             | Non-Fungible Tokens                |           |
-|                 | IPFS                               |           |
-| Selected Topics | Layer 2 Solutions                  |           |
-|                 | Bots and Arbitrage                 |           |
-|                 | The Cryptography behind Blockchain |           |
-|                 | Hashing Functions  in Blockchain   |           |
-|                 | Solidity Basics                    |           |
-|                 | Tradition Finance Review           |           |
+| Section         | Chapter                                                      | Readiness |
+| --------------- | ------------------------------------------------------------ | --------- |
+| Prologue        |                                                              |           |
+| Foundations     | Origins                                                      |           |
+|                 | Blockchain Technology                                        |           |
+|                 | Ethereum                                                     |           |
+| Crypto-Assets   | Introduction to DeFi                                         |           |
+|                 | [Fungible Tokens](https://github.com/ciri/defi-book/blob/main/pdf/220-Fungible-Tokens.pdf) | ✓         |
+|                 | [Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/230-Stablecoins) | ✓         |
+|                 | Algorithmic Stablecoins                                      |           |
+|                 | Crowdfunding                                                 |           |
+| Applications    | Credit Markets                                               |           |
+|                 | Automated Market Makers                                      |           |
+|                 | Liquidity Mining & Yield Farming                             |           |
+|                 | Perpetuals                                                   |           |
+| NFT             | Non-Fungible Tokens                                          |           |
+|                 | IPFS                                                         |           |
+| Selected Topics | Layer 2 Solutions                                            |           |
+|                 | Bots and Arbitrage                                           |           |
+|                 | The Cryptography behind Blockchain                           |           |
+|                 | Hashing Functions  in Blockchain                             |           |
+|                 | Solidity Basics                                              |           |
+|                 | Tradition Finance Review                                     |           |
 
 In general: 
 
