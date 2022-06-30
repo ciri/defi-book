@@ -1,0 +1,2658 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass template/fancymemoir
+\begin_preamble
+% Lyx stuff
+\input{template/lyx.tex}
+% Graphics/figure captions
+\input{template/gfx.tex}
+%Math and font selection
+\input{template/fonts.tex}
+%SQL/verbatim/code formatting
+\input{template/codeformat.tex}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8-cjk
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\font_cjk gkai
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{chapter}{7} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Algorithmic Stablecoins
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lettrine{C}{ollateralized}
+\end_layout
+
+\end_inset
+
+ stablecoins provide a safe haven to offshore your assets when turbulent
+ tides affect crypto markets.
+ Even so, they are arguably either too centralized (off-chain collateral)
+ or not scalable enough (on-chain collateral) to be a viable long-term option
+ for truly decentralized finance.
+ Algorithmic approaches attempt to get the best aspect of both worlds by
+ establishing economic incentivization mechanisms that coordinate participants
+ towards stability.
+ Essentially they encode a monetary policy in a smart contract through which
+ they hope to stabilize the token just like a central bank would - but more
+ transparently.
+ They are the holy grail of stablecoins as they could potentially combine
+ the benefits of decentralization with a virtually infinite supply using
+ economic theory.
+\end_layout
+
+\begin_layout Standard
+Two influential papers in this space have been Ferdiando Ametrano's 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+Hayek Money: The Cryptocurrency Price Stability Solution
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ and Robert Sam's 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+A Note on Cryptocurrency Stabilisation: Seigniorage Shares
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+, both published in 2014.
+ In it, they propose schemes to build such algorithmic stablecoins on-chain.
+ We will cover each in depth as they still underpin some of the largest
+ stablecoins to date.
+ But first, a quick refresher on the macro-economics of money.
+\end_layout
+
+\begin_layout Section
+Macro-economics of money
+\end_layout
+
+\begin_layout Subsection
+The Quantity Theory of Money
+\end_layout
+
+\begin_layout Standard
+The value of money is determined by the link between money and the prices
+ of the things you can buy with nominal amounts of money.
+ The demand for money comes from (a) a transactional need - you want to
+ pay for things right now and (b) other motives such as short-term savings
+ or your personal piggy bank.
+ What balances are required to support just our transactional needs? Assume
+ for the sake of simplicity that you receive a paycheck every Friday and
+ that you spend that paycheck over the course of that week.
+ On Friday morning companies hold the paychecks and on Friday evening the
+ balances are transferred to the wage-earners.
+ As the week passes, the money balances will gradually siphon back into
+ the companies' accounts as consumption proceeds.
+ In this way, money is reused over and over as it changes hands from producers
+ to consumers and back.
+\end_layout
+
+\begin_layout Standard
+The Quantity Theory of Money states that the total amount of required money
+ to settle these transactions (the demand) can be stated as: 
+\begin_inset Formula 
+\[
+M_{d}(k,T,Pr)=k\times T\times{Pr}
+\]
+
+\end_inset
+
+Here, 
+\begin_inset Formula $M_{d}(k,T,Pr)$
+\end_inset
+
+ is the quantity of money in circulation, 
+\begin_inset Formula $T$
+\end_inset
+
+ the number of transactions made and 
+\begin_inset Formula $Pr$
+\end_inset
+
+ the average monetary value of a transaction.
+ What this equation is saying is that the amount of money in circulation
+ 
+\emph on
+demanded
+\emph default
+ to support our needs is equal to the transactional need (
+\begin_inset Formula $T\times Pr$
+\end_inset
+
+) times a factor.
+ The factor 
+\begin_inset Formula $k$
+\end_inset
+
+ accounts for the fact that we have other needs (such as storing money in
+ our piggy bank).
+ If, e.g., firms and households want to store balances of about 1 month's
+ worth of purchases, 
+\begin_inset Formula $k$
+\end_inset
+
+ would be equal to 
+\begin_inset Formula $1/12$
+\end_inset
+
+.
+ For our purposes here, we will assume that it's a constant whose exact
+ value is not important.
+\end_layout
+
+\begin_layout Standard
+The amount of money supplied 
+\begin_inset Formula $M_{s}(k,T,Pr)$
+\end_inset
+
+ is controlled by central banks but neither households nor firms have any
+ control over it.
+ A focal point of study in macroeconomists is the equilibrium point at which
+ the market (society) settles 
+\begin_inset Formula $M_{d}$
+\end_inset
+
+ (through the number of transactions it makes and pricing dynamics) to a
+ situation in which supply and demand balance out 
+\begin_inset Formula $M=M_{d}=M_{s}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+The Value of Money
+\end_layout
+
+\begin_layout Standard
+The value of money 
+\begin_inset Formula $P$
+\end_inset
+
+, is the number of goods we can buy with a fixed nominal amount.
+ It is inversely correlated to the quantity of money in circulation as we
+ know from the QTM that money is simply a means of transaction with no other
+ inherent value.
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example:
+\series default
+ If the demand for pizzas is 100 per year, and there is a total quantity
+ of $1,000 of money in circulation for pizzas, the value of the currency
+ would be 
+\begin_inset Formula $P=100/1000\frac{\text{ pizza's}}{\$}$
+\end_inset
+
+ .
+ If the central bank decides to increase the money supply to $1,200 and
+ no other real value is created in society, the value of the currency would
+ decline to 
+\begin_inset Formula $P'=100/1200\frac{\text{ pizza's}}{\$}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Thus, we arrive at the correlation between the quantity of money and the
+ value that money: 
+\begin_inset Formula 
+\[
+P\sim1/Q
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $P$
+\end_inset
+
+ is expressed as the value of goods you can purchase per monetary unit.
+ We typically measure the value of money as the global purchasing power
+ of the money using a basket of goods or an index thereof like the CPI (Consumer
+ Price Index).
+ The actual value of 
+\begin_inset Formula $Q$
+\end_inset
+
+ is determined by market forces in QTM as is more easily seen through the
+ lens of supply and demand curves:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/production-valueofmoney.png
+	width 100col%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The value of money is correlated to the quantity of money in circulation
+ as shown by the demand line.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The x-axis shows the (nominal) 
+\emph on
+quantity
+\emph default
+ of money which is simply all the money that is currently in liquid circulation
+ (remember our discussion on M1 and M2).
+ The y-axis shows the value (
+\emph on
+purchasing power
+\emph default
+) of the currency.
+ Our equilibrium point equation (
+\begin_inset Formula $Q=M=k\times T\times Pr$
+\end_inset
+
+) is represented as a black dot and indicates what society settled on as
+ the right balance between nominal quantity 
+\begin_inset Formula $Q$
+\end_inset
+
+ and purchasing power 
+\begin_inset Formula $P$
+\end_inset
+
+ of the money under study.
+\end_layout
+
+\begin_layout Standard
+The green 
+\emph on
+demand curve
+\emph default
+ represents the correlation between the quantity of money and how much money
+ people want to hold.
+ Here, 
+\begin_inset Quotes eld
+\end_inset
+
+want
+\begin_inset Quotes erd
+\end_inset
+
+ doesn't mean how much a person wants to own in some idealized future, but
+ rather what they think an appropriate level of money to hold is if the
+ quantity were at a certain level.
+ Note also, that these curves don't offer any insights (yet) on external
+ factors like a raging pandemic, rising inequality, income dynamics, the
+ cost of holding money, or other things that could affect this relation.
+ The only thing this curve states is that all else being equal (
+\emph on
+ceteris paribus
+\emph default
+), if the quantity of money increases, society is going to want more of
+ it on average and its value is going to be diminished.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+supply curve
+\emph default
+ (blue) shows the correlation between the stock of money in circulation
+ and the price level as determined by the market.
+ As we know already, the market has little to say here with central banks
+ and their subsidiaries having a monopoly on the supply of money.
+ That is, a change in price level is not going to affect the quantity being
+ supplied directly.
+ We, therefore, assume that it is constant as represented by the vertical
+ line.
+ Of course, if a central bank does decide to print more money, we can account
+ for that by moving our constant vertical line to the right.
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example:
+\series default
+ Let's warm up by seeing what happens when a central bank prints money.
+ If a central bank prints money (move from 
+\begin_inset Formula $\text{Supply}$
+\end_inset
+
+ to 
+\begin_inset Formula $\text{Supply}'$
+\end_inset
+
+), goods will become more expensive and therefore, the purchasing power
+ will go down (from 
+\begin_inset Formula $P_{0}$
+\end_inset
+
+ to 
+\begin_inset Formula $P_{1}$
+\end_inset
+
+).
+ Hayek's problem with governments was not that inflation happened (as inflation
+ in and of itself does not reduce wealth), but rather with how wealth was
+ redistributed in the process of the minting of new currency (unfairly).
+ 
+\end_layout
+
+\begin_layout Standard
+The demand curve (green), can change as well.
+ We know from historical examples and economical theory that:
+\end_layout
+
+\begin_layout Itemize
+An increase in the GDP increases income, which in turn causes the demand
+ curve to shift to the right.
+ 
+\end_layout
+
+\begin_layout Itemize
+Higher transaction costs will lead to fewer transactions being made (people
+ being more illiquid) and therefore typically causes an increase in demand
+ for money.
+ 
+\end_layout
+
+\begin_layout Itemize
+Risk attitudes can affect demand in either direction.
+ 
+\end_layout
+
+\begin_layout Itemize
+Falls in the nominal interest rates can cause the demand curve to shift
+ to the right.
+ 
+\end_layout
+
+\begin_layout Subsection
+Why Bitcoin is not a suitable Hayek currency
+\end_layout
+
+\begin_layout Standard
+Hayek critiqued gold for not being a good store of value, in his 1977 paper
+ he stated that: 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+It would turn out to be a very good investment, for the reason that because
+ of the increased demand for gold the value of gold would go up; but that
+ very fact would make it very unsuitable as money.
+ You do not want to incur debts in terms of a unit which constantly goes
+ up in value as it would in this case, so people would begin to look for
+ another kind of money: if they were free to choose the money, in terms
+ of which they kept their books, made their calculations, incurred debts
+ or lent money, they would prefer a standard which remains stable in purchasing
+ power.
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph default
+ Bitcoin, often incorrectly called the digital gold, does suffer from the
+ same fatal flaws - but worse.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/production-bitcoin.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+production-bitcoin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The supply of Bitcoin is inelastic, meaning that a change in price does
+ not incur a change in supply: 
+\begin_inset Formula 
+\[
+\eta=\frac{\Delta Q}{\Delta P}=0
+\]
+
+\end_inset
+
+This lies at the heart of why it is so volatile.
+ In general, products with inelastic supplies will tend to be very sensitive
+ to demand shifts as is illustrated above (left).
+ The green dotted line shows an increase in the demand for BTC.
+ As the quantity is fixed, we move up to a new price point P'.
+ Had the supply line (blue) been more elastic (i.e.., 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+ like the gold supply line on the right), the price jump would have been
+ much more moderate for a similar shift in demand.
+\end_layout
+
+\begin_layout Standard
+The empirical production curves are plotted below, each dashed line shows
+ the start of a year and its corresponding supply line (note that as we
+ go from left to right, the quantity jumps become exponentially smaller).
+ The demand lines are similar to our prior ones and the equilibrium points
+ are annotated with the black dots.
+ The purchasing power was measured using the Consumer Price Index for All
+ Urban Consumers from the St.
+\begin_inset space ~
+\end_inset
+
+Louis FED database.
+ We observe that Bitcoin's real purchasing power has steadily increased
+ over time.
+ Of course, this is simply a reflection of the increased demand as we showed
+ in the previous plot (green dotted line moving right).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/production-bitcoin-empirical.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirically measured value of Bitcoin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Proposals
+\end_layout
+
+\begin_layout Subsection
+Elasticity of Supply through Rebasing
+\end_layout
+
+\begin_layout Subsubsection
+Monetary Policy
+\end_layout
+
+\begin_layout Standard
+Ferdinando proposed to solve Bitcoin's inelasticity issue by simply inverting
+ the supply-demand curves' logic to our advantage.
+ With the usage of smart contracts, it is easy to program a monetary policy
+ that keeps the purchasing power of the underlying token stable by 
+\begin_inset Quotes eld
+\end_inset
+
+rebasing
+\begin_inset Quotes erd
+\end_inset
+
+ the token.
+ Rebasing means that we expand and contract the supply of the token to maintain
+ price parity.
+ As is shown in the schematic below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/schematic-rebasing.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Rebasing mechanisms in essence change the token ownership of the user to
+ ensure price stability of the token.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At the start of the process, Alice pays $100 to own ฿100.
+ A shift in demand causes the price to go down by 5%.
+ The monetary policy then specifies that the supply of base-tokens must
+ be changed proportionally by 5%.
+ Alice now owns ฿95 which she can exchange for $100, and the price peg is
+ maintained.
+ Note that any gains/losses are distributed proportionally to the base token
+ holders.
+\end_layout
+
+\begin_layout Standard
+The revaluation of the token is best analyzed using the curves as before.
+ Like before, we are working with a demand curve (green line) that encapsulates
+ the correlation between quantity 
+\begin_inset Formula $Q$
+\end_inset
+
+ and an associated price level 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ We add infinite elasticity to obtain even better responsiveness than gold:
+ 
+\begin_inset Formula 
+\[
+\eta=\frac{\Delta Q}{\Delta P}=\infty
+\]
+
+\end_inset
+
+Visually, this means that the supply curve is flat, effectively responding
+ to any changes in demand.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/production-hayek.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Hayek proposal
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rebasing means that we increase the quantity by printing more money in the
+ underlying smart contract to increase.
+ Simply put, if at the end of some period (the 
+\emph on
+rebase period
+\emph default
+) the price has increased by an average X%, all we need to do is change
+ the coin supply by an average X%: 
+\begin_inset Formula 
+\[
+\begin{aligned}\Delta P & =\frac{P'-P}{\bar{P}}\\
+\Delta Q & =\frac{Q'-Q}{\bar{Q}}
+\end{aligned}
+\]
+
+\end_inset
+
+Note that we measure price and quantity changes (
+\begin_inset Formula $\Delta P$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta Q$
+\end_inset
+
+) as relative to the 
+\begin_inset Quotes eld
+\end_inset
+
+settlement averages
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Formula $\bar{P}=(P'+P)/2$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{Q}=(Q'+Q)/2$
+\end_inset
+
+ in the denominator).
+ This convention allows us to more easily analyze changes as is shown in
+ the following example.
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example:
+\series default
+ let's say that we simply used the face value price change 
+\begin_inset Formula $\Delta P=\frac{P'-P}{P}$
+\end_inset
+
+ .
+ A price change from $1 to $1.4 would translate to 
+\begin_inset Formula $\Delta P=40\%$
+\end_inset
+
+, whereas a price change back from $1.4 to $1 would translate to 
+\begin_inset Formula $\Delta P=\$0.6-\$1=-28\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Quote
+If we use the settlement average price change as suggested before, we would
+ get a 33% change in both directions.
+ 
+\end_layout
+
+\begin_layout Standard
+Setting 
+\begin_inset Formula $\Delta P=\Delta Q$
+\end_inset
+
+ we find the solution to the target quantity
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In the original paper the quantities are changed using the starting price
+ as denominator resulting in 
+\begin_inset Formula $Q'=Q\times\frac{P'}{P}$
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0pt
+\end_inset
+
+.:
+\end_layout
+
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+Q'=\frac{2Q+Q\Delta P}{2-\Delta P}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming that we have a mechanism to both increase and decrease the quantity
+ of our currency proportionally to their current holdings, we would be able
+ to rebase our currency fairly while keeping the price of the currency.
+ As can be seen from the plot on the right, this monetary policy allows
+ us to shift the increase in price due to higher demand to an increase in
+ supply.
+ We have thus obtained our original goal of keeping the price stable.
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example
+\series default
+ : Let's say that we want to peg our stablecoin to the dollar so that it's
+ always worth exactly 1 USD.
+ We start by minting 
+\begin_inset Formula $Q=1,000,000$
+\end_inset
+
+ of our tokens.
+ If our currency becomes popular, increased demand will move the demand
+ curve to the green dotted line with an associated price move to 
+\begin_inset Formula $P'$
+\end_inset
+
+.
+ The increase in the stablecoins demand is shown by the red area: 
+\begin_inset Formula 
+\[
+\begin{aligned}\Delta M & =(P'-P)\times Q\\
+ & =(1.4-1)\times1,000,000\\
+ & =400,000
+\end{aligned}
+\]
+
+\end_inset
+
+Ceteris paribus, we would see that our stablecoin's price would jump to
+ $1.4 USD due to this demand.
+ In order to counter this effect, the smart contract would need to change
+ the supply by 
+\begin_inset Formula $\Delta Q=\frac{1.4-1}{(1.4+1)/2}=33.33\%$
+\end_inset
+
+ to 
+\begin_inset Formula $Q'=1,400,00$
+\end_inset
+
+ in this case.
+ Indeed, the demand increase remains intact as at this price level we get
+ that (green area): 
+\begin_inset Formula 
+\[
+\begin{aligned}\Delta M & =(Q'-Q)\times P\\
+ & =(1.4\text{ million}-1\text{ million})\times1\\
+ & =400,000
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+color{black}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color black
+We see that rebasing effectively replaces price volatility for quantity
+ volatility.
+ Most algorithmic protocols use a similar idea, but they differ in how they
+ manage the elasticity of the supply.
+\end_layout
+
+\begin_layout Subsubsection
+Example: AMPL
+\end_layout
+
+\begin_layout Standard
+The most popular protocol that implements straightforward rebasing at the
+ time of writing is Ampleforth.
+ They try to follow the CPI and rebase the supply to do so.
+ This means that if you hold AMPL tokens in your wallet, you may hold more
+ or less of those tokens a week later.
+ For this inconvenience you get two big advantages:
+\end_layout
+
+\begin_layout Itemize
+Everything is done proportionally as described before, meaning that everybody
+ wins/loses the same.
+ 
+\end_layout
+
+\begin_layout Itemize
+A pizza will cost about the same amount of AMPL now as it will in the future
+ - except for any shocks that would make pizzas super expensive (e.g., a huge
+ strike by the Italian community).
+ 
+\end_layout
+
+\begin_layout Standard
+Ampleforth is constantly tweaking its algorithms, but the most important
+ changes to the above mechanism are that:
+\end_layout
+
+\begin_layout Itemize
+In the interest of stability, corrections are only performed if the price
+ of AMPL depegs more than a certain percentage (e.g.
+\begin_inset space ~
+\end_inset
+
+5%).
+ 
+\end_layout
+
+\begin_layout Itemize
+The designers of Ampleforth introduce smoothing which spread price changes
+ over time to avoid overcorrections of the price.
+ This was actually suggested by both Hayek and Ferdiando's paper as well.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Verdict
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/AMPL-notstablecoin.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+AMPL characteristics over the period of 2020-2022.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As can be seen from the supply chart on the left, strong corrections have
+ been needed as demand for AMPL caused high volatility over the period of
+ 2020 to 2022.
+ The real purchasing power of 1 AMPL that was purchased on January 1st 2020
+ is charted on the right.
+ It takes into account (1) the rebasing of that AMPL, (2) the price of AMPL,
+ and (3) the CPI as a proxy for purchasing power.
+ For reference, we are also plotting the dollar value of AMPL in red.
+ Notice how the purchasing power of our 2020 AMPL followed the price of
+ AMPL almost 1 to 1.
+ Almost every peak in the plot indicates a period in time where had you
+ bought at that moment, you would likely have lost up to 50% w.r.t.
+ the true purchasing power soon after.
+ We conclude that for our 2020 AMPL token holder, AMPL has not been stable
+ at all.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Making things worse, huge amounts of AMPL have been allocated to insiders
+ before AMPL was officially released on the market.
+ Therefore, it could be argued that most of the upside that you see in the
+ above graphs has been captured by the founders and speculative investors.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While rebasing tokens effectively solves the issue of keeping the price
+ of the token stable, it is not a comforting idea that your wallet balance
+ could change based on factors outside of your control.
+ Furthermore, this trick will - ceteris paribus - only rebase the currency's
+ face value.
+ That is, it while it stabilizes the 
+\emph on
+purchasing power
+\emph default
+ of the currency, it does not stabilize the purchasing power of the holdings
+ of the user which is what we really desire.
+ Additionally, most popular clones of AMPL have depegged quickly (YAM =
+ $0.22, DEBASE=$0.03, BASED=$0.015).
+ Time will tell whether AMPL is able to avoid the same faith but a similar
+ loss in faith may very well lead to a similar outcome.
+\end_layout
+
+\begin_layout Subsection
+Coin-and-Share Systems
+\end_layout
+
+\begin_layout Subsubsection
+Monetary Policy
+\end_layout
+
+\begin_layout Standard
+The purchasing power of rebased tokens is as volatile as holding a cryptocurrenc
+y like Bitcoin from the perspective of the stablecoin holder.
+ The key idea in Robert's paper was to bifurcate the stablecoin into 2 tokens,
+ one which keeps purchasing power (the 
+\emph on
+stablecoin
+\emph default
+) and one which captures any changes in purchasing power pro-rata (the 
+\emph on
+share-token
+\emph default
+ or 
+\emph on
+seignorage shares
+\emph default
+).
+ Holders who want to just have a stable store of value hold the stablecoins,
+ whereas speculators who wish to speculate on the value of the stablecoin
+ protocol through promised future dividend payments hold the seignorage
+ shares.
+ The price and amount of these shares and dividends are calculated precisely
+ such that it ensures the stability of the stablecoin.
+\end_layout
+
+\begin_layout Standard
+Let us assume for the sake of simplicity that we are pegging the stablecoin
+ to the dollar.
+ As long as the stablecoin is indeed priced at 
+\begin_inset Formula $P=\$1/\text{stablecoin}$
+\end_inset
+
+ no action is required from the smart contract.
+ Price deviations are resolved through minting more coins or share-for-coin
+ swaps.
+ Two potential scenarios unfold which require corrective action.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\series bold
+Scenario 1: expansion, the stablecoin is priced too high
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/schematic-expansion.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Expansion phase of a coin-and-share system.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We now have two actors in the ecosystem: Alice the stablecoin holder and
+ Ray, the red-haired speculator.
+ Just like before Alice paid $100 to own her ฿100 and we observe a 5% increase
+ in price.
+ The monetary policy will then proceed by first minting more stablecoin,
+ but instead of being distributed to Alice, these stablecoins are distributed
+ as dividends to Ray.
+ This has two effects:
+\end_layout
+
+\begin_layout Itemize
+The value of Alice's holdings has remained stable at $100.
+ 
+\end_layout
+
+\begin_layout Itemize
+The value of Ray's speculative holdings has increased from $100 to $105
+ ($100 from holding฿100, and $5 from holding ฿5) 
+\end_layout
+
+\begin_layout Standard
+Let's analyze this using our familiar curves:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/production-coin-and-share-up.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+In coin-and-share systems, stablecoins are purchased by selling share tokens.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The price has gone up, beyond the peg.
+ We must devaluate the token by issuing 
+\begin_inset Formula $\Delta Q=Q_{1}-Q_{0}$
+\end_inset
+
+ more tokens and selling them at a clearing price of 
+\begin_inset Formula $\bar{P}$
+\end_inset
+
+ which we will assume to be the average between the starting price (
+\begin_inset Formula $P_{0}$
+\end_inset
+
+) and the ending price at which the last token is sold (
+\begin_inset Formula $P_{1}$
+\end_inset
+
+).
+ This puts downward pressure on the price due to inflation until the price
+ is correctly pegged again.
+ The 
+\begin_inset Formula $\Delta Q$
+\end_inset
+
+ stablecoins that are created in this process are then given to the shareholders.
+ Two prevalent mechanisms exist:
+\end_layout
+
+\begin_layout Enumerate
+Just hand out the stablecoins 
+\emph on
+pro-rata
+\emph default
+ to shareholders through a dividend distribution.
+ Shareholders can sell their tokens on the open market for $ if they choose
+ to do so.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Create an auction in which the protocol sells newly minted stablecoins to
+ shareholders for a portion of their shares (right curve) which results
+ in a value increase of the total shareholdings (a 
+\emph on
+share buyback
+\emph default
+).
+ 
+\end_layout
+
+\begin_layout Standard
+The latter mechanism can be visualized as (i) an increase in demand through
+ the smart contract's purchase of tokens causing a price increase from 
+\begin_inset Formula $P_{0}^{S}$
+\end_inset
+
+ to 
+\begin_inset Formula $P_{1}^{S}$
+\end_inset
+
+ followed by (ii) the burning of those tokens from 
+\begin_inset Formula $Q_{1}^{S}$
+\end_inset
+
+ to 
+\begin_inset Formula $Q_{2}^{S}$
+\end_inset
+
+.
+ The final increase in wealth is then captured by the new market cap (
+\begin_inset Formula $P_{2}^{S}Q_{2}^{S}>P_{0}^{S}Q_{0}^{S}$
+\end_inset
+
+) and divided proportionally.
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example:
+\series default
+ the stablecoin is priced at 
+\begin_inset Formula $P_{0}=\$1.04$
+\end_inset
+
+ and the total circulating supply is 
+\begin_inset Formula $Q_{0}=1,000,000$
+\end_inset
+
+ .
+ We have 
+\begin_inset Formula $\Delta M=\$40,000$
+\end_inset
+
+ demand that we need to adjust for in the protocol.
+ The protocol mints 
+\begin_inset Formula $\Delta M/\bar{P}$
+\end_inset
+
+ tokens in order for the market to rebalance the stable price to 
+\begin_inset Formula $P_{1}=\$1.00$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Quote
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt" special="@{}l">
+<column alignment="left" valignment="top">
+<column alignment="none" valignment="top" special="l@{}">
+<row endhead="true">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Situation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Q
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+P
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Start
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,000,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Appreciation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,000,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$1.04
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sale @ 
+\begin_inset Formula $\bar{P}=1.02$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,039,215.69
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Either way, the net effect on shareholders is positive, as shareholders
+ were paid out $40,000 worth of basis tokens pro-rata (an average 4% return).
+ Furthermore, they still own the same relative amount of shares.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\series bold
+Share values
+\end_layout
+
+\begin_layout Standard
+As the stablecoin protocol is faced with increasing demand, more value flows
+ to the shareholders.
+ Share tokens, therefore, promise a claim on a future income stream such
+ that their Net Present Value can be calculated as: 
+\begin_inset Formula 
+\[
+P_{T}^{s}=\frac{1}{Q_{t}^{S}}\sum_{i=t}^{\infty}\frac{\Delta Q_{i}}{(1+r_{i})^{i}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ is the discount rate applied to the rebasing periods in the future.
+ This works so long as 
+\begin_inset Formula $\Delta Q_{i}$
+\end_inset
+
+ is expected to be positive in the future.
+ The reality unfortunately shows that the value of the shares and the token
+ often tend to zero in current designs.
+ Let's see what happens in a period of contraction.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\series bold
+Scenario 2: contraction, the stablecoin price is too low
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/schematic-contraction.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Contraction schematic
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In a contraction phase, stablecoins are bought by the protocol using shareholder
+'s capital, after which they are burned.
+ The resulting reduction in stablecoin supply makes its value appreciate.
+ At the end of the process this should have the following effect on Alice
+ and Ray's holdings if a 5% drop in stablecoin price was detected:
+\end_layout
+
+\begin_layout Itemize
+The value of Alice's holdings has regained its stable value at $100 (up
+ from a temporary $95).
+ 
+\end_layout
+
+\begin_layout Itemize
+The value of Ray's speculative holdings has decreased from $100 to $95 (the
+ price of ₮ dropped to 0.95$/₮) 
+\end_layout
+
+\begin_layout Standard
+Let's analyze this using our familiar curves:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/production-coin-and-share-down.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+production-coin-and-share-down
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The price has gone down, lower than the peg.
+ We must decrease its supply to get price stability but we cannot do it
+ by simply rebasing users' tokens.
+ In order to do so, the protocol first mints tokens (essentially a 
+\emph on
+stock split
+\emph default
+) which it sells on the market for stablecoin.
+ The total number of shares required to be able to cover the purchase of
+ 
+\begin_inset Formula $\Delta Q$
+\end_inset
+
+ is 
+\begin_inset Formula $\Delta Q^{S}/\bar{P}^{S}$
+\end_inset
+
+ where 
+\begin_inset Formula $\bar{P}^{S}$
+\end_inset
+
+ is the average sale price.
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example:
+\series default
+ the stablecoin is priced at 
+\begin_inset Formula $P_{0}=\$0.96$
+\end_inset
+
+ and the total circulating supply is 
+\begin_inset Formula $Q_{0}=1$
+\end_inset
+
+ million.
+ The token shares are currently priced at 100$/₮ .
+ with a supply of 
+\begin_inset Formula $Q_{0}^{S}=10,000$
+\end_inset
+
+.
+ We have a decline of 
+\begin_inset Formula $\Delta D=\$40,000$
+\end_inset
+
+ in demand that we need to account for in the system.
+ We, therefore, mint $40,000 worth of shares first at an average price of
+ 
+\begin_inset Formula $\bar{P}^{S}=98$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Quote
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt" special="@{}l">
+<column alignment="left" valignment="top">
+<column alignment="none" valignment="top" special="l@{}">
+<row endhead="true">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Situation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $P^{S}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Q^{S}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(1) Start
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(2) Sale @ 
+\begin_inset Formula $\bar{P}^{S}=98$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$96
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10,416
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+Note how the total market cap of the shares remained the same, but the original
+ shareholders lost $40,000 in value by holding onto their 10,000 shares.
+ The protocol sells the additional shares immediately at a valuation of
+ average price 
+\begin_inset Formula $\bar{P}^{S}$
+\end_inset
+
+ to obtain 
+\begin_inset Formula $\Delta Q$
+\end_inset
+
+ at an average price of 
+\begin_inset Formula $\bar{P}=0.98$
+\end_inset
+
+ $/฿, or converted to shares, 100 ฿/₮.
+\end_layout
+
+\begin_layout Quote
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="none" valignment="top" special="@{}l">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="none" valignment="top" special="l@{}">
+<row endhead="true">
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Situation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $P$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(_) Start
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,000,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(0) Depreciation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,000,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$0.96
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(_) Purchase @ 
+\begin_inset Formula $\bar{P}=\$0.98$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,000,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(1) Burn
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9,600,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+The market cap of the tokens remains unchanged at ($960,000) which still
+ reflects the lower demand, but the price peg has been restored to $1.
+ 
+\end_layout
+
+\begin_layout Standard
+The net effect on shareholders is negative, as their existing shares are
+ worth ~4% less.
+ The new shares in the system were paid for by shareholders.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\series bold
+Death Spirals
+\end_layout
+
+\begin_layout Standard
+This incentivization mechanism works as long as we are in a phase of expansion
+ for the protocol and the market in general.
+ If for some reason, investors lose faith in the token the incentive to
+ buy shares may falter.
+ This has led to so-called 
+\emph on
+death spirals
+\emph default
+ in contraction phases.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/production-coin-and-share-spiral.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+production-coin-and-share-spiral
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As we've seen before, in a contraction phase shares need to be sold off
+ to increase the price which puts downward pressure on shares price (left
+ plot).
+ This is okay if shareholders are confident and hold their remaining shares
+ regardless, but as it turns out shareholders tend to lose confidence in
+ such a situation which in turn reduces the demand for shares (right plot).
+ If no one wants to buy shares, this in turn means that we now need to issue
+ many more shares to be able to prop up the stablecoin.
+ This can quickly get out of hand until no demand is left for the shares
+ and therefore, not enough reserves remain to be able to support the stablecoin'
+s value.
+ As we will see later, this is the rule rather than the exception in current
+ designs, or as Catalini and Gortari 2021 state it: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Ultimately, protocols highly exposed to death spirals will see one.
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Example: Basis Cash Token
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename /home/enric/cloud/Crypto/book/writing/chapters/fig/240/schematic-basis.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The bonds and shares model of Basis.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Basis token follows the original seignorage shares quite closely but splits
+ the seignorage shares in two parts: shares and bonds.
+ There are therefore three fundamental tokens that one can hold:
+\end_layout
+
+\begin_layout Enumerate
+Basis Token (฿): stable token meant to be a medium of exchange.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Basis Shares Token (₮):
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+A fixed supply of tokens with a volatile value that receives dividends when
+ the price of ฿ inflates too much.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Obtained by locking some ฿ in collateral.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Can be redeemed back to ฿ at market rates.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Basis Bond Token (₲): bonds, sometimes called coupons and limited by an
+ expiration date in other protocols):
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Variable supply of tokens 
+\end_layout
+
+\begin_layout Enumerate
+Obtained by paying 
+\begin_inset Formula $P^{2}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+฿
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ to the protocol.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Can be redeemed back for 1฿, but only when 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+฿
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+>1.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Let's investigate both correction phases:
+\end_layout
+
+\begin_layout Itemize
+Expansionary: ฿ > $1.05
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mint more ฿, the price will drop.
+ 
+\end_layout
+
+\begin_layout Itemize
+Extra ฿ are deposited in treasury where 
+\emph on
+bondholders
+\emph default
+ can redeem them.
+ (first buyers first in case of constraints).
+ 
+\end_layout
+
+\begin_layout Itemize
+Any left-overs are deposited in the Boardroom where 
+\emph on
+shareholders
+\emph default
+ can withdraw them as dividends.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Contraction: ฿ <$0.95
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The system starts selling 
+\emph on
+bonds
+\emph default
+ with a face value of ฿=1 at the price of 
+\begin_inset Formula $P^{2}<1$
+\end_inset
+
+ .
+ Note that bonds are bought using ฿ thereby pushing up demand for ฿.
+ 
+\end_layout
+
+\begin_layout Itemize
+They hold the potential to be sold for exactly 1฿ when the supply expands
+ again (see the previous scenario) thereby yielding a profit for its holders
+ 
+\emph on
+in ฿ terms
+\emph default
+ (not necessarily USD).
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+The basic system is elegant but suffers from the same flaw as the original
+ system.
+ In the contraction phase, not all investors will be optimistic and some
+ will be hesitant to buy bonds.
+ With the peg not restoring itself, this could cause more downward pressure
+ on the protocol which turns into a death spiral and the unavoidable collapse
+ of ฿.
+ The original project was not launched due to regulatory difficulties in
+ the U.S., but a copy called Basis Cash was launched and included many anti-collap
+se mechanisms, including adding expiration dates to bonds and increased
+ basis HODL incentives.
+ In the end, all that's really protecting the peg are the collateral shares.
+ The only real value for those shares is the belief in Basis as there is
+ no outside utility for them (except for speculation).
+ Despite a great reception and promising initial valuation by the investor,
+ the protocol's demise was swift and ruthless.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/basis-token.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Basis token's spiral of death was swift and never recovered.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Other examples that incorporate parts of this design at their core include:
+ Elastic Set Dollar (ESD), DSD, SHARE, USDX, FEI, TITAN, FRAX, and Terra's
+ UST
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Since the time of writing, some of these have collapsed already.
+\end_layout
+
+\end_inset
+
+.
+ In the end, the question to ask is always this: what is the value of the
+ collateral backing the protocol? If the answer is the belief in the protocol
+ itself, there is no rational basis for the protocol to not end-up in this
+ scenario at some point in its lifetime.
+\end_layout
+
+\begin_layout Subsection
+Notable mentions
+\end_layout
+
+\begin_layout Subsubsection
+Floating protocols
+\end_layout
+
+\begin_layout Standard
+Some algorithmic coins do away with a constant outsourced peg altogether
+ and follow a floating peg instead.
+ Examples include Float, RAI, and OHM.
+ These resemble the design of MakerDAO more and should be viewed in the
+ same light.
+ In essence, most of these protocols use a basket of cryptocurrencies (ETH,
+ BTC, \SpecialChar ldots
+) as collateral which should avoid the issue of non-belief that results
+ in a death spiral.
+ To be credit-worthy, however, these protocols rely on speculators who are
+ willing to collateralize the protocol in the hope to leverage price movements.
+ In that sense, they resemble a set-up like MakerDAO.
+ For investors, the most important aspect to follow is how over/under-collateral
+ized the system is, as this will determine the risk of participating in
+ the projects
+\end_layout
+
+\begin_layout Subsubsection
+Hybrids / Fractional Tokens
+\end_layout
+
+\begin_layout Standard
+Fractional tokens like FRAX and TITAN/IRON collateralize their stablecoins
+ with a mix of asset-backed stablecoins and algorithmic stablecoins.
+ As we have seen in the example of TITAN/IRON, the risk of a bank-run still
+ exists, but your exposure, in that case, relates to the mixing coefficient:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/240/iron-token.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+IRON's partial collapse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To compensate for the loss of confidence, the protocol started minting TITAN
+ collateral at a rate that caused hyperinflation which results in the value
+ dropping to $0.
+ Protocols like FRAX add circuit breakers to avoid this issue but remain
+ monetary experiments for the time being.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Resources
+\end_layout
+
+\begin_layout Itemize
+https://docs.google.com/spreadsheets/d/1hX0aDYDnFgZ_ZeNBeGqEBe2MoRTYnbW2Zqtt71yeJL
+4/edit#gid=0 
+\end_layout
+
+\begin_layout Itemize
+https://threadreaderapp.com/thread/1393651168681676801.html 
+\end_layout
+
+\begin_layout Itemize
+https://www.cato.org/cato-journal/spring/summer-2021/ten-stablecoin-predictions-th
+eir-monetary-policy-implications#prediction-7 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+A Note on Cryptocurrency Stabilisation: Seigniorage Shares
+\begin_inset Quotes erd
+\end_inset
+
+ , Robert Sams 
+\end_layout
+
+\begin_layout Itemize
+Beware the Coupon Clipper: The Insurmountable Flaws of so-called Algorithmic
+ Stablecoins
+\end_layout
+
+\begin_layout Itemize
+DAI collapse: https://blog.makerdao.com/the-market-collapse-of-march-12-2020-how-i
+t-impacted-makerdao/ 
+\end_layout
+
+\begin_layout Itemize
+Macro: https://www.economics.utoronto.ca/jfloyd/modules/nafm.html
+\end_layout
+
+\begin_layout Itemize
+https://insights.deribit.com/market-research/stability-elasticity-and-reflexivity-
+a-deep-dive-into-algorithmic-stablecoins/ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
