@@ -23,7 +23,7 @@ The preliminary table-of-contents is as follows:
 | Crypto-Assets   | Introduction to DeFi                                         |           |
 |                 | [Fungible Tokens](https://github.com/ciri/defi-book/blob/main/pdf/220-Fungible-Tokens.pdf) | ✓         |
 |                 | [Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/230-Stablecoins.pdf) | ✓         |
-|                 | Algorithmic Stablecoins                                      |           |
+|                 | [Algorithmic Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/240-240-AlgorithmicStablecoins.pdf) | ✓         |
 |                 | Crowdfunding                                                 |           |
 | Applications    | Credit Markets                                               |           |
 |                 | Automated Market Makers                                      |           |
