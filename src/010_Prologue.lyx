@@ -1,0 +1,384 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass template/fancymemoir
+\begin_preamble
+% Lyx stuff
+\input{template/lyx.tex}
+% Graphics/figure captions
+\input{template/gfx.tex}
+%Math and font selection
+\input{template/fonts.tex}
+%SQL/verbatim/code formatting
+\input{template/codeformat.tex}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8-cjk
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\font_cjk gkai
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Prologue
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+floatstyle{plain}
+\backslash
+restylefloat{figure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig/010/timemachine.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+floatstyle{myFigureStyle}
+\backslash
+restylefloat{figure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Quotes eld
+\end_inset
+
+Vague, but exciting
+\begin_inset Quotes erd
+\end_inset
+
+ - these are the words that Mark Sendall wrote on Tim Berners-Lee's 1989
+ proposal for a client-server architecture with links, which we now known
+ as the world-wide web.
+ The decades after saw an incredibly fast-paced evolution from the advent
+ of early web browser such as Mosaic in 1993 to the development of e-commerce
+ platforms like Amazon and Alibaba and the first types of social media in
+ 1997.
+ Had you been asked to invest in any of these technologies, would you have
+ done it? If only we had a time-machine indeed! But we are in luck, there
+ is a reasonable chance that blockchain (the 
+\begin_inset Quotes eld
+\end_inset
+
+internet-of-value
+\begin_inset Quotes erd
+\end_inset
+
+) may present us with a similar opportunity.
+ We are already beyond the vague, but exciting phase, and well into web-browser
+ territory.
+\end_layout
+
+\begin_layout Standard
+One of the most exciting stories of the past years has undoubtedly been
+ the vindication of blockchain.
+ Infamous for its alleged pyramid-like features and multiple scams and hacks,
+ it has somehow managed to turn all of this around and attract the attention
+ of controversial entrepreneurs like Elon Musk as well as more traditional
+ investors who expose themselves through funds like Grayscale's bitcoin
+ trust (a crypto ETF).
+ Almost every respectable consultancy company in the world has a blockchain
+ divisions, and most incumbents' innovation labs of have at least experimented
+ with the technology by now.
+ Governments across the world are feeling the heat with many experimenting
+ with digital fiat money which they hope will satiate the demand for more
+ transparent, faster, and cheaper currencies 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Include example of eurobond?
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+What is causing such a diverse population to leave behind traditional currencies
+ and become blockchain-zealots? To understand this phenomenon better, we
+ must first let go of the notion of crypto-currencies as just alternative
+ stores of value (
+\begin_inset Quotes eld
+\end_inset
+
+digital gold
+\begin_inset Quotes erd
+\end_inset
+
+) or just the latest speculative growth asset.
+ Instead, blockchain should be seen as fundamentally a fully integrated
+ technology which can be programmed to do so much more.
+ Indeed, during the past years, entrepreneurs and developers have worked
+ hand-in-hand to create complete and fully functional financial platforms
+ with backing of billions of USD in venture capital.
+ The end-result of this hard labor is the central theme of this book.
+ DeFi (Decentralized Finance) is an ecosystem which offers all financial
+ services that are found within traditional financial institutions - minus
+ many of its barriers.
+ This book is therefore not about valuing Bitcoin or Ethereum, or the latest
+ coin that is in fashion.
+ Instead, the purpose of this book is to expose you to the beauty of blockchain
+ technology with applications to finance.
+ Let's look at an example.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Alice lives in Venezuela and does not have access to many financial services.
+ With a few clicks of a button, it is now possible for her to buy USD pegged
+ stable-coins using crypto-currency from a decentralized exchange (DEX),
+ then deposit them into a lending protocol or use futures to earn double-digit
+ interest via interest-bearing tokens which she owns and manages herself.
+ She can supply these interest-bearing instruments to an investment pool
+ to optimize return for the assets.
+ If she is weary of capital loss due to recent FUD (bad press) for a product
+ that she is using, she can insure her investments on-chain.
+ Twenty clicks later, she has obtained a fully insured portfolio that rivals
+ that of advanced investors in fully developed financial-service economies
+ - all of which, while staying within the blockchain ecosystem.
+\end_layout
+
+\begin_layout Standard
+Don't worry if you didn't get all of that, by the end of this book you will!
+ The point of the above story is to show how far along decentralized finance
+ has come.
+ It is an impressive feat that blockchain technology has caught up to decades
+ of innovation in finance already, and its partly why at the time of writing
+ it has attracted more than USD 40 billion dollars of investments by end-users
+ already.
+ But to claim that DeFi is equivalent to traditional finance would be dishonest.
+ In fact, we are seeing the glimpses of it expanding its capabilities into
+ the realm of financial fantasy.
+ Imagine a world where machines coordinate transactions with each other
+ without any human interaction, where financial contracts are settled automatica
+lly based on pre-specified conditions.
+ A place where transactions no longer need to go through the slow process
+ of clearance using an order-book, but instead are instantly settled by
+ automated market makers (AMM).
+ Even more mind-boggling, imagine being able to loan 10 million dollars
+ without putting up any collateral, use that to gain a 12% arbitrage return
+ on some asset and then pay the loan back, all within less than 15 seconds
+ of time from start to finish and no KYC.
+ These are just a handful of avant-garde financial innovations that are
+ operational on blockchain today.
+ It is likely that even these will seem rudimentary compared to what will
+ be developed tomorrow, if the speed of innovation keeps up with its current
+ track-record.
+\end_layout
+
+\begin_layout Standard
+This book was written over the course of 2020 and 2021 when we were experiencing
+ a major bull run due to DeFi.
+ Whether that bull-run will have lasted by the time you read these pages,
+ is uncertain.
+ What is certain, is that blockchain is here to stay, for the long run.
+ You have been given a time-machine and its up to you to use it as you desire.
+ Just like in 1993, the road to mass-adoption is perilous, full of volatility
+ and booms and busts.
+ Even so, I have not been more excited about a technology than blockchain
+ in a long time, and I hope that you will be too after learning more about
+ it.
+ Whether or not you are prepared to invest your hard-earned savings in this
+ technology, it would be a mistake to ignore it.
+ And if you do decide to invest, simple blanket investments in crypto-currencies
+ or off-chain trusts which track them is not going to cut it if you truly
+ want to capture the value of this emergent technology.
+ Indeed, this is the time for any self-respecting investor to start learning,
+ and you have taken your first step by obtaining this book.
+ Alternatively, you could wait for another time machine to appear, but as
+ we know those are few and far between.
+\end_layout
+
+\begin_layout Section
+Why this book
+\end_layout
+
+\begin_layout Standard
+DeFi is a complicated subject to learn with a steep learning curve and an
+ incredibly fast pace of innovation.
+ At the same time, it is much more risky than traditional finance as there
+ are both financial risks, legal risks, as well as blockchain-specific risks
+ to take into account.
+ When you read the documentation of DeFi projects (you should!), you will
+ usually encounter a disclaimer somewhere in the beginning saying that users
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+should do their own research (DYOR) and be aware of the risks
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ While true, it glosses over another truth: it is difficult to find high-quality
+ information which describes coherently what those risks are exactly.
+\end_layout
+
+\begin_layout Standard
+This book will give you a framework that will guide you through your own
+ DeFi journey, along with formula's to calculate your own risks and returns.
+ By reading it, you are doing your own research and will be knowledgeable
+ enough to know what the major risk/reward trade-offs are for projects that
+ are described within it.
+ With that said, I did not intend to write this book as financial advice
+ and numbers contained within it are mostly for illustration purposes.
+ It is also not an introduction to blockchain, we will assume that you are
+ already with the basics such as what consensus algorithms and wallets are.
+ We will only cover these briefly to ensure that this book can be understood
+ from the grounds-up.
+ Even so, I encourage you to read-up on these topics beyond what is written
+ here if you haven't already.
+\end_layout
+
+\begin_layout Section
+A Community Effort
+\end_layout
+
+\begin_layout Standard
+This book was originally intended as an introductory text for upper undergraduat
+e business majors.
+ Halfway its development, we decided to follow the somewhat unusual development
+ design of Bayesian Methods for Hackers.
+ All content is open-source: everyone is free to read, but also to contribute
+ to the book using github.
+\end_layout
+
+\begin_layout Section
+How you should read this book
+\end_layout
+
+\begin_layout Standard
+This book does not need to be read in a linear fashion.
+ I encourage readers who are not familiar with blockchain technology to
+ first read Part 1 of the book which introduces the basic concepts.
+ Part 2 is more like a menu that you can select from when you use certain
+ products.
+ They are presented in a manner that is sequentially consistent as some
+ later chapters may require knowledge from earlier ones.
+\end_layout
+
+\begin_layout Standard
+Let's begin!
+\end_layout
+
+\end_body
+\end_document
