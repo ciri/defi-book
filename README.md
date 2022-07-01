@@ -25,7 +25,7 @@ The preliminary table-of-contents is as follows:
 |                 | [Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/230-Stablecoins.pdf) | ✓         |
 |                 | [Algorithmic Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/240-AlgorithmicStablecoins.pdf) | ✓         |
 |                 | Crowdfunding                                                 |           |
-| Applications    | Credit Markets                                               |           |
+| Applications    | [Credit Markets](https://github.com/ciri/defi-book/blob/main/pdf/310-Credit-Markets.pdf) | 90%       |
 |                 | Automated Market Makers                                      |           |
 |                 | Liquidity Mining & Yield Farming                             |           |
 |                 | Perpetuals                                                   |           |
@@ -48,7 +48,7 @@ In general:
 
 ### Making edits
 
-We use [LyX](https://www.lyx.org/), a cross-platform document editor. Once you have downloaded the github files, open up "book.lyx" in LyX or any of the relevant chapters in the /chapters directory.
+We use [LyX](https://www.lyx.org/), a cross-platform document editor which transpiles to TeX. Once you have downloaded the github files, open up any of the relevant chapters in the /src directory in LyX.
 
 ### Commiting
 
@@ -61,7 +61,7 @@ Thanks to all our contributing authors, including (in chronological order):
 
 | Authors                                   |      |      |
 | ----------------------------------------- | ---- | ---- |
-| [Enric Junque de Fortuny](http://ciri.be) |      |      |
+| [Enric Junque de Fortuny](http://ciri.be) | ...  |      |
 |                                           |      |      |
 |                                           |      |      |
 

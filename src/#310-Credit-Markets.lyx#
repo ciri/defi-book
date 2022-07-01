@@ -1,0 +1,1391 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass template/fancymemoir
+\begin_preamble
+% Lyx stuff
+\input{template/lyx.tex}
+% Graphics/figure captions
+\input{template/gfx.tex}
+%Math and font selection
+\input{template/fonts.tex}
+%SQL/verbatim/code formatting
+\input{template/codeformat.tex}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8-cjk
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\font_cjk gkai
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Part
+DeFi Applications
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{chapter}{9} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Credit Markets
+\end_layout
+
+\begin_layout Standard
+Credit market lies at the heart of finance and allows us to smooth our income
+ streams and consumption over time.
+ If we earn more than we consume, we can lend our money to someone else
+ by putting it into a savings product thereby earning us some future interest
+ payment.
+ Someone else who earns less than he consumes can then use the capital that
+ we deposited and put it to productive use after which he pays back the
+ loan plus some interest.
+\end_layout
+
+\begin_layout Section
+Basic Mechanics
+\end_layout
+
+\begin_layout Subsection
+Introduction
+\end_layout
+
+\begin_layout Standard
+In traditional finance, there are two main modes in which credit is made
+ available.
+ On the one hand, we have banks that are allowed to create money to lend
+ it out to their customers (as discussed before).
+ These banks will typically require some collateral (e.g., a mortgage on your
+ house, or in the extreme case, your freedom).
+ On the other hand, peer-to-peer lending platforms match savers and borrowers.
+ These tend to be looser on requirements and therefore riskier.
+ In peer-to-peer lending, all the capital needs to be available a priori.
+ In both of these modes, the capital must be returned at predetermined periods
+ of time together with ssome interest which can be constant (fixed), or
+ depend on some external time-dependent factors (variable).
+\end_layout
+
+\begin_layout Standard
+Decentralized credit markets offer these functions on the blockchain, but
+ differ in that they typically require relatively large amounts of on-chain
+ collateral to prove credit-worthiness.
+ The reason is, of course, that borrowers tend to be anonymous and as a
+ lender we want to avoid someone running off with the principal (the amount
+ we lent them).
+ Very few regulations exist and there is, therefore, no consumer protection.
+ Interestingly, on-chain credit is typically perpetual - meaning that there
+ is no fixed limit when a loan ends.
+ Interest is paid out continuously and the loan can be paid back in arbitrary
+ amounts at arbitrary times.
+ Examples of popular credit market protocols are Compound, Aave, dydx, and
+ AlphaHomorra.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/310/creditmarket.png
+	lyxscale 50
+	width 100text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Decentralized credit market participants and actions.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:deficreditflow"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Decentralized credit markets
+\end_layout
+
+\begin_layout Standard
+The dynamics of decentralized credit markets are shown in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:deficreditflow"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The smart contract coordinates several actors with different incentives
+ and use-cases.
+\end_layout
+
+\begin_layout Subsubsection*
+Savings
+\end_layout
+
+\begin_layout Standard
+First, a 
+\emph on
+saver
+\emph default
+ or 
+\emph on
+lender
+\emph default
+ deposits a 
+\emph on
+principal
+\emph default
+ amount to the credit market which accrues interest.
+ Typically, she will get a 
+\emph on
+credit token
+\emph default
+ that proves her deposit.
+ For instance, if she deposits DAI in Compound, she will get cDAI tokens
+ of an equivalent amount back (aDAI on Aave, etc.).
+ At a later point in time, she can withdraw the principal plus the accrued
+ interest by sending her cDAI tokens back to the smart contract.
+ As the cDAI tokens are not tied to any one account, a saver can alternatively
+ choose to sell the cDAI tokens on an token market as well (see next Chapter).
+ Savers form the lifeblood of the credit markets as they are responsible
+ for funding the reserves from which loans can be drawn.
+\end_layout
+
+\begin_layout Subsubsection*
+Borrowing
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+borrower
+\emph default
+ first needs to deposit some collateral to prove that she is credit-worthy.
+ This can be done in a similar vein as a savings deposit, the only difference
+ being that typically only a select number of reliable tokens are typically
+ allowed as 
+\emph on
+collateral
+\emph default
+.
+ After the deposit, the borrower is then allowed to borrow tokens from the
+ credit market up to a certain amount (typically less than the value of
+ the collateral).
+\end_layout
+
+\begin_layout Subsubsection*
+Oracles
+\end_layout
+
+\begin_layout Standard
+The smart contract constantly calculates the value of its assets and its
+ liabilities based on internal and external price signals of the tokens
+ contained in the market.
+ The external price signals are provided by 
+\emph on
+oracles
+\emph default
+ which aggregate the price of several different trading platforms to come
+ up with a fair estimate.
+ This diversity of price signals is necessary as there have been cases of
+ heavy price manipulation in single markets which have caused credit markets
+ to fail (see the example below).
+ Whenever a price change leads to a potential default of a borrower, the
+ position is up for liquidation.
+\end_layout
+
+\begin_layout Subsubsection*
+Liquidation bots
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Liquidators
+\emph default
+ (typically bots) actively monitor positions to see which ones are going
+ in default.
+ Upon default, they compete for the right to shore up the position by buying
+ the debt in return for some of the collateral (and this at a discounted,
+ profitable price).
+ 
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example: 
+\series default
+in November 2020 a price manipulation caused approximately $89 million in
+ liquidations, including some of the most ardent supporters of Compound.
+ The issue was that Compound used Coinbase exclusively as a price oracle
+ which made it open for manipulation.
+ In this particular case, an incredibly large purchase of DAI caused its
+ value to shoot up from its (stable) value of $1 to $1.30.
+ This caused many DAI debt positions to become increasingly untenable and
+ undercollateralized eventually going into default.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+https://decrypt.co/49657/oracle-exploit-sees-100-million-liquidated-on-compound
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Design Space
+\end_layout
+
+\begin_layout Standard
+DeFi credit protocols differ in how they are designed.
+ In this section, we cover the main vectors of design and what their implication
+s are for the usage of the respective platforms.
+ Even though governance should be on this list, we will leave a discussion
+ on governance for a later chapter.
+\end_layout
+
+\begin_layout Subsection
+Collateralization Model
+\end_layout
+
+\begin_layout Subsubsection
+Terminology
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+collateral
+\series default
+ is the sum of assets that you deposit to show your creditworthiness and
+ to secure your debt.
+ Platforms typically have a minimum requirement expressed as a 
+\series bold
+collateralization rate (CR)
+\series default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{CR}=\frac{\text{Borrowed}}{\text{Deposited}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We say that a position is 
+\emph on
+over-collateralized
+\emph default
+ if 
+\begin_inset Formula $CR>1$
+\end_inset
+
+ and 
+\emph on
+under-collateralized
+\emph default
+ if 
+\begin_inset Formula $CR<1$
+\end_inset
+
+.
+ If a user's collateralization rate drops below the required ratio of a
+ platform (e.g., 150% in Aave's case), the position is (partly) liquidated.
+ This means that other users are allowed to purchase the collateral and
+ the debt at discounted prices.
+ In doing so, they save you from going into default and they earn the 
+\emph on
+liquidation spread
+\emph default
+.
+ Some platforms sell off your full position, but most will only allow partial
+ liquidations (e.g., 50% or 25% of the total position).
+ The amount that can be liquidated in one go is called the 
+\emph on
+close factor
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+The liquidation process
+\end_layout
+
+\begin_layout Standard
+In 
+\series bold
+direct liquidation
+\series default
+, bots monitor the blockchain to check which positions are going in default.
+ As soon as a position goes into default, the bot that pays the highest
+ gas is allowed to repay the debt (at a discount) and receive collateral.
+ This whole process is completed in one single blockchain transaction.
+ 
+\end_layout
+
+\begin_layout Standard
+In 
+\series bold
+auction-based liquidation
+\series default
+, bots bid to be able to repay the debt.
+ Whoever places the economically most interesting bid is allowed to purchase
+ the debt.
+ In an 
+\emph on
+English auction
+\emph default
+, bidders make offers as to how much they want to pay for the collateral.
+ In a 
+\emph on
+Dutch auction
+\emph default
+, the asking price starts high and is gradually reduced until someone accepts
+ the price.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The disadvantage of auctions is that they require active participation of
+ bots to work well.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+Example MakerDAO?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Interest rate models
+\end_layout
+
+\begin_layout Standard
+Platforms must constantly balance the supply and demand of different tokens
+ that are being deposited and borrowed.
+ Tokens that are in high demand (but low supply) naturally should be expensive
+ to borrow, and lucrative to deposit.
+ Conversely, low-demand tokens with a huge supply in the credit market (e.g.,
+ ETH) should be cheap to borrow and non-lucrative to deposit.
+ The main mechanism of regulating the cost of borrowing and saving tokens
+ is through 
+\series bold
+interest rate models
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+utilization
+\emph default
+ of a market 
+\begin_inset Formula $m$
+\end_inset
+
+ is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+U_{m}=\frac{L}{S}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with 
+\begin_inset Formula $L$
+\end_inset
+
+ loans and 
+\begin_inset Formula $S$
+\end_inset
+
+ savings.
+ A high utilization rate implies that we should make the interest repayments
+ high and vice versa.
+ Interest rates are rewarded instantaneously but only paid out when a user
+ takes an action in the market (interacts with the credit market contract).
+ The Interest Rate Index (IRI) at step 
+\begin_inset Formula $k$
+\end_inset
+
+ is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{k,m}=I_{k-1,m}(1+rt)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $t$
+\end_inset
+
+ is the number of blocks that happened since the previous update (the block
+ height) and 
+\begin_inset Formula $r$
+\end_inset
+
+ the per-block interest rate.
+ The total debt is equal to the current debt, plus the outstanding interest:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+D_{k,m}=D_{k-1,m}(1+rt)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When a loan is repaid, the outstanding interest is collected by the platform
+ and the depositors.
+\end_layout
+
+\begin_layout Subsubsection
+Kinked Interest Rates
+\end_layout
+
+\begin_layout Standard
+The most common model for setting interest rates are kinked rates, which
+ combine two linear curves:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+i_{b}=\begin{cases}
+\alpha+\beta U & \text{if }U\leq U_{opt}\\
+\alpha+\beta U_{opt}+\gamma(U-U_{opt}) & \text{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a per-block base rate and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ a per-block multiplier based on utilization (higher utilization implies
+ higher costs to for borrowing the asset and higher interest when depositing
+ savings in the asset).
+ 
+\end_layout
+
+\begin_layout Standard
+Compound, for:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+i_{s}=U(i_{b}(1-\lambda))
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is a reserve factor.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/310/kinked.png
+	width 100col%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Kinked interest rate model
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(
+\begin_inset Formula $U_{opt}=90\%$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha=0$
+\end_inset
+
+,
+\begin_inset Formula $\beta=8\%$
+\end_inset
+
+,
+\begin_inset Formula $\gamma=5$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Non-Linear Interest Rates
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO: double check with original paper.
+\end_layout
+
+\end_inset
+
+The dydx model follows a non-linear curve such as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+i_{b,m}=0.1U_{m}+0.05U_{m}^{4}+0.15U_{m}^{16}+0.20U_{m}^{32}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The exact components and coefficients depend on the market (asset).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/310/non-linear.png
+	width 100col%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Non-linear interest rate model.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Choosing a platform
+\end_layout
+
+\begin_layout Itemize
+which platform is best depends on the use-case
+\end_layout
+
+\begin_layout Itemize
+interest rates differ on a day-to-day basis but not on a weekly basis =>
+ go for the highest when saving, and the lowest when borrowing
+\end_layout
+
+\begin_layout Itemize
+Profit-volume-ratio shows that some platforms seem to be better in adverse
+ market conditions (a higher ratio is better for liquidators, a lower ratio
+ is better for borrowers).
+\end_layout
+
+\begin_layout Section
+Flash Loans
+\end_layout
+
+\begin_layout Subsection
+What it is
+\end_layout
+
+\begin_layout Standard
+Flash loans are an extremely exciting technology in which anyone is allowed
+ to (temporarily) loan astronomical amounts of assets as long as they manage
+ to pay it back within the same transaction (using a smart contract).
+ The process is:
+\end_layout
+
+\begin_layout Enumerate
+Take flash loan 
+\end_layout
+
+\begin_layout Enumerate
+Go wild 
+\end_layout
+
+\begin_layout Enumerate
+Repay loan collateral + interest 
+\end_layout
+
+\begin_layout Standard
+Fees tend to be relatively high, but the amount that you are allowed to
+ borrow is unlimited:
+\end_layout
+
+\begin_layout Itemize
+Fees: Uniswap: 0.3% ( v2 5 billion USD,* v3 2.2b USD) Aave - 0.3% ( 10 b USD)
+ * dydx 1 Wei (100M USD)
+\end_layout
+
+\begin_layout Subsection
+Use-cases
+\end_layout
+
+\begin_layout Subsubsection*
+Arbitrage
+\end_layout
+
+\begin_layout Standard
+Flash loans grant borrowers access to great amounts of capital to execute
+ arbitrages thereby making the market more efficient.
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:arbitrageflash"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows an example of an arbitrage situation that was executed on July 31st,
+ 2020 in transaction 0xf749..
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+0xf7498a2546c3d70f49d83a2a5476fd9dcb6518100b2a731294d0d7b9f79f754a
+\end_layout
+
+\end_inset
+
+ on the Ethereum blockchain using dydx.
+ In this particular arbitrage, the arbitrageur exploited the fact that the
+ price of USDC/DAI is different on two different exchanges of the curve
+ protocol.
+ This mispricing allowed the arbitrageur to bridge the market as follows:
+\end_layout
+
+\begin_layout Enumerate
+Take out a loan of 2.048M USDC
+\end_layout
+
+\begin_layout Enumerate
+Exchange the 2.048M USDC for 2.028M DAI in market 1 (at price 1.010 USDC/DAI).
+\end_layout
+
+\begin_layout Enumerate
+Exchange the 2.028M DAI back to 2.064 M USDC in market 2 (at price 1.018 USDC/DAI).
+\end_layout
+
+\begin_layout Enumerate
+Repay the loan 2.028M USDC loan.
+\end_layout
+
+\begin_layout Enumerate
+Profit 16,182 USDC
+\end_layout
+
+\begin_layout Standard
+The flash loan has given the arbitrageur a juicy profit without having to
+ deposit any funds! Participants of the Curve market are not necessarily
+ unhappy as their market has now become more efficient with the USDC/DAI
+ price being more equal after the arbitrage.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig/310/flashloanarbitrage.png
+	width 100text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Arbitrage example using a flash loan (Source: Qin et al 2021)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:arbitrageflash"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+DeFi attacks
+\end_layout
+
+\begin_layout Standard
+Flash loans are often used in DeFi attacks.
+ The attacker borrows a massive amount of tokens to then manipulate the
+ price on a market which is used in some other platform as a price oracle
+ (as was the case in the previous example on Compound).
+ This is the DeFi equivalent of a pump & dump and can be easily resolved
+ by using better price signals such as ChainLink oracle technology.
+ In further reading, we provide resources to more in-depth examples of this
+ type of attack.
+\end_layout
+
+\begin_layout Subsubsection*
+Washtrading
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Washtrading
+\emph default
+ is the act of increasing the trading volume of a market by repeatedly buying/se
+lling assets on that market.
+ Volumes are often used as a signal for popularity and potentially future
+ price in DeFi markets.
+ Furthermore, in TradFi, washtrading has been used to generate commission
+ fees that are redirected to fraudulent administrators who can hide these
+ income streams better (like in the Libor scandal).
+\end_layout
+
+\begin_layout Subsubsection*
+Flash-liquidation
+\end_layout
+
+\begin_layout Standard
+Furthermore, they enable 
+\emph on
+flash-liquidations
+\emph default
+, where the liquidator does not have the needed liquidity at the beginning
+ of the trade to execute a liquidation but instead borrows it and then repays
+ the debt using the received collateral.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Collateral swapping
+\end_layout
+
+\begin_layout Standard
+Lastly, they enable 
+\emph on
+collateral swapping
+\emph default
+ to efficiently swap a debt position.
+ 
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example:
+\series default
+ collateral swapping
+\end_layout
+
+\begin_layout Quote
+Assume that you have a debt position with 1 ETH collateral deposited and
+ a 1000 DAI liability.
+ You decided that you want to swap your ETH to USDC but want to keep your
+ DAI in productive use.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Take a flash loan of 1000 DAI
+\end_layout
+
+\begin_layout Enumerate
+Repay 1000 DAI to close your current debt position.
+\end_layout
+
+\begin_layout Enumerate
+Redeem 1 ETH.
+\end_layout
+
+\begin_layout Enumerate
+Swap 1 ETH to 2000 USDC
+\end_layout
+
+\begin_layout Enumerate
+Collateralize 2000 USDC and open a new position where you borrow 1000 DAI.
+\end_layout
+
+\begin_layout Enumerate
+Repay the flash loan.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+pragma solidity ^0.6.6;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+import "FlashLoanReceiverBase.sol"; 
+\end_layout
+
+\begin_layout Plain Layout
+
+import "ILendingPoolAddressesProvider.sol"; 
+\end_layout
+
+\begin_layout Plain Layout
+
+import "ILendingPool.sol";
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+contract Flashloan is FlashLoanReceiverBase {
+\end_layout
+
+\begin_layout Plain Layout
+
+    constructor(address _addressProvider) FlashLoanReceiverBase(_addressProvider
+) public {}
+\end_layout
+
+\begin_layout Plain Layout
+
+    /**
+\end_layout
+
+\begin_layout Plain Layout
+
+        This function is called after your contract has received the flash
+ loaned amount
+\end_layout
+
+\begin_layout Plain Layout
+
+     */
+\end_layout
+
+\begin_layout Plain Layout
+
+    function executeOperation(
+\end_layout
+
+\begin_layout Plain Layout
+
+        address _reserve,
+\end_layout
+
+\begin_layout Plain Layout
+
+        uint256 _amount,
+\end_layout
+
+\begin_layout Plain Layout
+
+        uint256 _fee,
+\end_layout
+
+\begin_layout Plain Layout
+
+        bytes calldata _params
+\end_layout
+
+\begin_layout Plain Layout
+
+    )
+\end_layout
+
+\begin_layout Plain Layout
+
+        external
+\end_layout
+
+\begin_layout Plain Layout
+
+        override
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\end_layout
+
+\begin_layout Plain Layout
+
+        require(_amount <= getBalanceInternal(address(this), _reserve),
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+                "Invalid balance, was the flashLoan successful?");
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        // Go wild.
+\end_layout
+
+\begin_layout Plain Layout
+
+        // !! Ensure that *this contract* has enough of `_reserve` funds
+ to payback the `_fee` !! 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        uint totalDebt = _amount.add(_fee);
+\end_layout
+
+\begin_layout Plain Layout
+
+        transferFundsBackToPoolInternal(_reserve, totalDebt);
+\end_layout
+
+\begin_layout Plain Layout
+
+    }
+\end_layout
+
+\begin_layout Plain Layout
+
+    /**
+\end_layout
+
+\begin_layout Plain Layout
+
+        Flash loan 1000000000000000000 wei (1 ether) worth of `_asset`
+\end_layout
+
+\begin_layout Plain Layout
+
+     */
+\end_layout
+
+\begin_layout Plain Layout
+
+    function flashloan(address _asset) public onlyOwner {
+\end_layout
+
+\begin_layout Plain Layout
+
+        bytes memory data = "";
+\end_layout
+
+\begin_layout Plain Layout
+
+        uint amount = 1 ether;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        ILendingPool lendingPool = ILendingPool(addressesProvider.getLendingPool(
+));      
+\end_layout
+
+\begin_layout Plain Layout
+
+        lendingPool.flashLoan(address(this), _asset, amount, data);
+\end_layout
+
+\begin_layout Plain Layout
+
+    }
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example of a flash loan on Aave v1.0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Resources
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+An Empirical Study of DeFi Liquidations: Incentives, Risks, and Instabilities
+\begin_inset Quotes erd
+\end_inset
+
+, Qin et al 2021
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+DeFi Protocols for Loanable Funds: Interest Rates, Liquidity and Market
+ Efficiency
+\begin_inset Quotes erd
+\end_inset
+
+, Gudgeon et al 2020.
+\end_layout
+
+\begin_layout Itemize
+Aave Protocol Whitepaper v1.0
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+https://github.com/aave/aave-protocol/blob/master/docs/Aave_Protocol_Whitepaper_v
+1_0.pdf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Compound: The Money Market Protocol
+\begin_inset Quotes erd
+\end_inset
+
+, Leshner, Hayes 2019
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+dYdX: A Standard for Decentralized Margin Trading and Derivatives
+\begin_inset Quotes erd
+\end_inset
+
+ Juliano 2017
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
