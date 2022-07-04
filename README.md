@@ -26,7 +26,7 @@ The preliminary table-of-contents is as follows:
 |                 | [Algorithmic Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/240-AlgorithmicStablecoins.pdf) | ✓         |
 |                 | Crowdfunding                                                 |           |
 | Applications    | [Credit Markets](https://github.com/ciri/defi-book/blob/main/pdf/310-Credit-Markets.pdf) | 90%       |
-|                 | Automated Market Makers                                      |           |
+|                 | [Automated Market Makers](https://github.com/ciri/defi-book/blob/main/pdf/320-AMM.pdf) | ✓         |
 |                 | Liquidity Mining & Yield Farming                             |           |
 |                 | Perpetuals                                                   |           |
 | NFT             | Non-Fungible Tokens                                          |           |

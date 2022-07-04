@@ -1,0 +1,2769 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass template/fancymemoir
+\begin_preamble
+% Lyx stuff
+\input{template/lyx.tex}
+% Graphics/figure captions
+\input{template/gfx.tex}
+%Math and font selection
+\input{template/fonts.tex}
+%SQL/verbatim/code formatting
+\input{template/codeformat.tex}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8-cjk
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\font_cjk gkai
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{chapter}{10} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Automated Market Makers
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lettrine{O}{n June 2017}
+\end_layout
+
+\end_inset
+
+ , Bancor took the crypto-world by storm in selling 79.3 million BNT tokens
+ in a three-hour sale.
+ The product that they were offering was one of crypto's first large decentraliz
+ed automated exchanges.
+ Up to that point in time, most crypto was traded on (a) hackeable centralized
+ exchanges, or (b) slow and expensive decentralized order-book exchanges.
+ Bancor solved both issues in designing a truly decentralized automatic
+ exchange system.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Automated Market Makers (AMMs)
+\emph default
+ - of which Bancor is a subset - are one of the first dapps that you will
+ get in contact with and as you will use them regularly it's good to have
+ a proper understanding of how they work.
+ AMMs are markets where you can exchange one digital asset (say, an ERC20
+ on Ethereum) for another, just like one regular exchanges.
+ Unlike traditional exchanges, however, AMMs do not work with an order-book
+ to match supply and demand, but instead clear orders automatically - and
+ almost instantly.
+ The counter-party, in this case, is therefore not a buyer (if you are selling)
+ but rather a smart-contract that you are interacting with.
+ What's more, the smart-contract can take both the role of the buyer as
+ well as that of the seller!
+\end_layout
+
+\begin_layout Section
+Basics
+\end_layout
+
+\begin_layout Subsection
+Relays
+\end_layout
+
+\begin_layout Standard
+When you swap a token on Bancor, you are interacting with a 
+\emph on
+relay
+\emph default
+ smart-contract which acts much like a merchant would on a market, but autonomou
+sly.
+\end_layout
+
+\begin_layout Standard
+Let us assume for the sake of example that we are interested in trading
+ bananas for grapes.
+ When the relay sets up shop, it contains equal reserves of both bananas
+ and grapes (by value).
+ For instance, if the 
+\emph on
+fair price
+\emph default
+ is 1 banana for 10 grapes, we could initially have 100 bananas and 1000
+ grapes in the shop.
+ Furthermore, we program the relay to only accept a trade if it swaps exactly
+ 1:10.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+floatstyle{plain}
+\backslash
+restylefloat{figure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/320/fruit-amm.png
+	width 100text%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+floatstyle{myFigureStyle}
+\backslash
+restylefloat{figure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As time goes on, however, the price of grapes and bananas may evolve.
+ Perhaps we had a monkey invasion, and now bananas are a really rare commodity!
+ An important feature of relay contracts is that they dynamically update
+ their price as the supply and demand of the underlying assets change.
+ For instance, after the monkey invasion we may see the price evolve as
+ follows:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="none" valignment="top" special="@{}l">
+<column alignment="left" valignment="top" width="0pt" special="@{}Xccc">
+<column alignment="left" valignment="top">
+<column alignment="none" valignment="top" special="l@{}">
+<row endhead="true">
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+t
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PRICE (B/G)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#BANANAS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#GRAPES
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1:10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1:11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+99
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1010
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1:12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+98
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1021
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\SpecialChar ldots
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\SpecialChar ldots
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\SpecialChar ldots
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\SpecialChar ldots
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At t=1, we still have our original price set.
+ Since bananas are actually much more expensive now, traders quickly try
+ to swap as many bananas as possible on the relay.
+ As the relay's reserves contain increasingly lower amounts of bananas,
+ the relay updates the amount of grapes it wants for 1 banana accordingly.
+\end_layout
+
+\begin_layout Subsubsection
+Relay Network
+\end_layout
+
+\begin_layout Standard
+Bancor was created to provide exchange between a wide variety of assets
+ (397 at the time of writing).
+ Doing so would require 78,606 relays (one for each pair) which is of course
+ not a very efficient way to go about things.
+ Further compounding our problems, there are some assets which may be rare
+ or new.
+ If we fragment them over 396 exchanges, we are bound to run into liquidity
+ issues.
+ In fact, this is the very raison-d'etre for Bancor: to provide liquidity
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+long-tail
+\begin_inset Quotes erd
+\end_inset
+
+ assets (assets with small volume).
+\end_layout
+
+\begin_layout Standard
+Bancor solves this issue using and invention that was first envisioned by
+ economist Keynes who proposed a supranational currency to facilitate this
+ very same problem in foreign exchange.
+ The idea is simple: create a 
+\emph on
+common reserve asset
+\emph default
+ that everybody wants, and that all other assets can trade into (Keynes
+ proposed relating this asset to gold somehow).
+ Let's say, for instance, that China is interested in obtaining dollars,
+ but the U.S.
+ is not interested in obtaining yuan.
+ Instead of dealing directly with the U.S., China could exchange its yuan
+ to the reserve asset and then change the reserve asset for dollars.
+ This way, China received its dollars and the U.S.
+ received the reserve asset which it wants as well.
+ The proposal was widely lauded and subsequently proposed at the infamous
+ Bretton Woods Conference, but failed to gain majority acceptance.
+ In the end, it was decided that all currencies would tie their exchange
+ rates to physical gold and therefore the USD (because USD had the largest
+ gold reserves at the time).
+\end_layout
+
+\begin_layout Standard
+In a similar vein, Bancor ties all currencies to a protocol-specific token
+ called BNT
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Bancor also defines a alternative stable reserve currency called USDB, but
+ we will stick to BNT for the sake of simplicity here.
+\end_layout
+
+\end_inset
+
+.
+ Moreover, all relays have their own associated reserve currency which can
+ be freely swapped for both BNT and a counter-tokens in the relay.
+ If we want to convert, say, ETH to WBTC we proceed as follows:
+\end_layout
+
+\begin_layout Enumerate
+Exchange ETH for BNT using the ETH relay.
+ We mint ETH relay reserve tokens during this process.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Exchange BNT to WBTC using the WBTC relay.
+ We burn BNT relay reserve tokens during this the process.
+ 
+\end_layout
+
+\begin_layout Standard
+Note that after each exchange happens, the underlying relays will update
+ their reserves and reserve prices.
+ This process is illustrated below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/320/bancor-relay.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The relay system allows swapping tokens for exotic pairs and avoids the
+ quadratic complexity of needing to have liquidity for everything.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In practice, we never interact with the relays ourselves when we perform
+ swaps.
+ Instead, we talk to the Bancor network which takes care of all the details
+ behind the scenes.
+\end_layout
+
+\begin_layout Section
+Price Mechanisms
+\end_layout
+
+\begin_layout Subsection
+Bonding curves
+\end_layout
+
+\begin_layout Standard
+==TODO: Should we move this to a chapter on ICO's?==
+\end_layout
+
+\begin_layout Standard
+To understand how the prices of our relays are guaranteed to always be a
+ correct reflection of the market price, we must first talk about the relays'
+ reserve currencies and bonding curves.
+\end_layout
+
+\begin_layout Subsubsection
+Monetary Policy of Continuous Supply Tokens
+\end_layout
+
+\begin_layout Standard
+Bonding curves were proposed by Simon de La Rouviere in 2017 as an answer
+ to ICOs.
+ The problem with ICO's is that you mint all tokens at once at a fixed price
+ and a fixed supply, which leads to all sorts of problems including front-runnin
+g and the inability to issue more tokens in the future for funding purposes.
+ Simon proposed an alternative scheme in which a smart-contract controls
+ the minting, pricing, and burning of the reserve and therefore acts as
+ the main liquidity provider.
+\end_layout
+
+\begin_layout Standard
+The basic idea is that you 
+\begin_inset Quotes eld
+\end_inset
+
+bond
+\begin_inset Quotes erd
+\end_inset
+
+ (deposit), a limited amount of existing tokens (say, 10 ETH) into the smart
+ contract, which then mints however many reserve tokens (let's call these
+ RSV) needed to match the initial price that you set for the reserve token.
+ Conversely, you can always swap your RSV back to ETH, which causes the
+ smart contract to (a) reduce its ETH reserve and (b) increase its RSV tokens.
+ These two actions together, in turn, impact the price of RSV.
+ That is, as you add or remove ETH to the contract, the contract updates
+ the price for that ETH based on a curve called the 
+\begin_inset Quotes eld
+\end_inset
+
+bonding curve
+\begin_inset Quotes erd
+\end_inset
+
+ which defines the 
+\emph on
+monetary policy
+\emph default
+ of the reserve token.
+ This is akin to traditional supply / demand curves seen in economics and
+ the previous chapter on stablecoins, but in AMMs it's typical to just look
+ at the resulting bonding curve and liberally experiment with its shape.
+ For instance, we may determine that a relation of 
+\begin_inset Formula $P(S)=(S/10)^{2}$
+\end_inset
+
+ is optimal for our reserve token, leading to the following bonding curve:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/320/bondingcurve_intro.png
+	width 100text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The bonding curve 
+\begin_inset Quotes eld
+\end_inset
+
+bonds
+\begin_inset Quotes erd
+\end_inset
+
+ the price of the RSV token w.r.t ETH as a function of its supply.
+ More demand implies a higher pprice and vice versa.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Continuing our previous example, we see that at the start we provided it
+ 10 ETH at a fixed price of 1 ETH / RSV.
+ Therefore, the starting reserve had a supply of 20 RSV which the creator
+ of the reserve token receiving all of the supply for depositing her 1 ETH.
+ Let's be optimistic and assume that many users believe in the project backed
+ by this reserve token and purchase RSV with their ETH thereby increasing
+ the supply of RSV to 40.
+ If we wanted to now buy RSV for ETH, the price would have increased to
+ 16 ETH / RSV, a 16x increase! This is quite an aggressive pricing schedule,
+ with some notable exceptions people typically tend to stick to linear,
+ or even logarithmic functions.
+\end_layout
+
+\begin_layout Subsubsection
+Pricing a trade
+\end_layout
+
+\begin_layout Standard
+The price (point on the curve) that we have referred to until now is the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+instantaneous
+\begin_inset Quotes erd
+\end_inset
+
+ price, meaning it's the price if we were to trade an incredibly small amount
+ of ETH/RSV.
+ The 
+\emph on
+effective price
+\emph default
+ 
+\begin_inset Formula $P_{e}$
+\end_inset
+
+ for trading larger amounts is instead found by somehow 
+\begin_inset Quotes eld
+\end_inset
+
+averaging
+\begin_inset Quotes erd
+\end_inset
+
+ over the curve from the starting price point to the ending price point
+ as can be seen in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:bondingprice"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+(left).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/320/bondingcurve_pricing.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A trade moves the price point along the bonding curve.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:bondingprice"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For instance, consider that the current price is 16 RSV/ETH, what would
+ the effective price of the trade be if we wanted to buy 10 RSV using ETH?
+ The two quoted prices on the curve are: 
+\begin_inset Formula 
+\[
+\begin{aligned}P_{0}=\left(\frac{40}{10}\right)^{2} & =16\\
+P_{1}=\left(\frac{50}{10}\right)^{2} & =25
+\end{aligned}
+\]
+
+\end_inset
+
+A crude first-order estimate of the effective price would be to take the
+ average of these two end-points for our trade: 
+\begin_inset Formula $P_{e}\approx20.5$
+\end_inset
+
+.
+ The correct effective price, is however found by integrating over the price
+ curve: 
+\begin_inset Formula 
+\[
+\begin{aligned}P_{e} & =\frac{1}{50-40}\int_{40}^{50}\left(\frac{S}{10}\right)^{2}\text{d}S\\
+ & =\left.\frac{S^{3}}{3000}\right|_{40}^{50}\\
+ & =41.6-21.3=20.3
+\end{aligned}
+\]
+
+\end_inset
+
+Note the division by the number of tokens as merely integrating would give
+ us the price for all tokens traded (10 in this case).
+ A more general formula would be: 
+\begin_inset Formula 
+\[
+P_{e}=\frac{1}{S_{1}-S_{0}}\int_{S_{0}}^{S_{1}}P(S)\text{ d}S
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+You will probably never use this formula in your own trading, the important
+ thing to remember, however, is that you pay more/receive less for trades
+ where the amount you trade significantly shifts the price point.
+ This happens when you either (a) trade a lot of tokens, or (b) are trading
+ a token with a small user-base/supply.
+ We will discuss other factors that can impact your trade later in this
+ chapter.
+\end_layout
+
+\begin_layout Subsection
+Bonding curves in Bancor
+\end_layout
+
+\begin_layout Subsubsection
+Smart Tokens
+\end_layout
+
+\begin_layout Standard
+Bonding curves are defined within the relays smart contracts of Bancor which
+ act as 
+\emph on
+smart tokens
+\emph default
+.
+ That is, a smart token represents money (ST) that holds other money in
+ its reserves (let us assume that we use ETH as the 
+\begin_inset Quotes eld
+\end_inset
+
+other
+\begin_inset Quotes erd
+\end_inset
+
+ for now).
+ If you've studied economy before, you may recognize this scheme as it is
+ similar to how Keynes' supranational currency proposal required gold.
+ Key characteristics of a smart token are
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+https://blog.bancor.network/smart-tokens-101-63edc2cc5a89
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+Anyone can purchase the smart token using the reserve tokens (ETH).
+ The buyer gets newly minted smart tokens (ST) in return.
+ 
+\end_layout
+
+\begin_layout Itemize
+Unlike ICO's and Keynes' model, buyers can liquidate their smart tokens
+ back to the contract in exchange for the original currency at all times.
+ 
+\end_layout
+
+\begin_layout Itemize
+A smart token ensures that at all times the 
+\emph on
+reserve ratio
+\emph default
+ is fixed (bonded).
+ That is, the ratio of the reserve balance versus the market-cap (supply
+ times price) of the smart token are kept constant.
+ 
+\end_layout
+
+\begin_layout Itemize
+The price of the smart token therefore changes with its supply and demand:
+ less demand implies more selling which implies a lower price.
+ 
+\end_layout
+
+\begin_layout Standard
+A simple analogy that people sometimes use when discussing this protocol
+ is that you could interpret a deposit of ETH as if the contract 
+\begin_inset Quotes eld
+\end_inset
+
+lends
+\begin_inset Quotes erd
+\end_inset
+
+ ETH from the user and gives back an I-Owe-You of ST.
+ When the user wants her ETH back, she provides the I-Owe-You and the contract
+ sends back the desired ETH.
+\end_layout
+
+\begin_layout Subsubsection
+Monetary Policy of a Smart Token
+\end_layout
+
+\begin_layout Standard
+As we mentioned above, the monetary policy is such that the ratio of the
+ reserve balance versus the market-cap (supply times price) of the smart
+ token are kept constant.
+ This is encoded as follows in Bancor: 
+\begin_inset Formula 
+\[
+F=\frac{R_{\text{ETH}}}{S_{\text{ST}}\times P}
+\]
+
+\end_inset
+
+Where reserve ratio 
+\begin_inset Formula $F\in[0,1)$
+\end_inset
+
+ is a fixed constant chosen at the start, and 
+\begin_inset Formula $P$
+\end_inset
+
+ the price of the smart-token in ETH.
+ We will drop the subscript for 
+\begin_inset Formula $S_{\text{ST}}$
+\end_inset
+
+ since we only deal with one smart token here.
+ You can show that the bonding curve for such a supply is given by (see
+ appendix for the proof): 
+\begin_inset Formula 
+\[
+P(S)=\left(\frac{S}{S_{0}}\right)^{1/F-1}P_{0}
+\]
+
+\end_inset
+
+Where 
+\begin_inset Formula $S_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{0}$
+\end_inset
+
+ are the initial supply and price respectively.
+ This formula defines a family of bonding curves, specified by the constant
+ reserve ratio 
+\begin_inset Formula $F$
+\end_inset
+
+ which determines the elasticity of the price (how aggressively the price
+ reacts to changes in supply).
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:bancorbonding"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows supply curves for different factors 
+\begin_inset Formula $F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/320/bondingcurve_bancor.png
+	width 100col%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bancor's bonding curves
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:bancorbonding"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While in most cases 
+\begin_inset Formula $F$
+\end_inset
+
+ is chosen to be 
+\begin_inset Formula $50\%$
+\end_inset
+
+ such that we get a linear relation, it's instructive to look at the other
+ cases as well for later:
+\end_layout
+
+\begin_layout Itemize
+At 
+\begin_inset Formula $F\in(0,0.5)$
+\end_inset
+
+ we have a decreasingly aggressive price curve.
+ Low values mean that the ST becomes very expensive quickly, whereas high
+ values mean that the ST becomes more linearly behaved.
+ 
+\end_layout
+
+\begin_layout Itemize
+At 
+\begin_inset Formula $F\in(50\%,100\%)$
+\end_inset
+
+ we get a concave price curve that increases its price less than a linear
+ relation would demand.
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $F=100\%$
+\end_inset
+
+ is a pathological case where we effectively peg the token to a constant
+ value (i.e., the price never changes, regardless of supply).
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $F=0\%$
+\end_inset
+
+ is not a valid choice as it would lead to infinite prices.
+ 
+\end_layout
+
+\begin_layout Standard
+Regardless of choice, we can see that by just focussing on the bonding curve,
+ we are already realizing a wide variety of interesting monetary policies.
+\end_layout
+
+\begin_layout Subsubsection
+Multi-Asset Bonding
+\end_layout
+
+\begin_layout Standard
+Bancor adds one more layer of complexity in that it allows for multiple
+ reserves at the same time.
+ We could for instance have a smart token reserve containing both BNT and
+ ETH (just like you could have USD and GBP in Keynes' model).
+ This realization by the Bancor team was the enabler for most of its project:
+ mixing reserves allows us to swap one reserve for the other through the
+ instant minting and liquidation of the underlying smart token currency.
+\end_layout
+
+\begin_layout Standard
+In order to keep things simple, we will isolate just one relay token and
+ its reserves for now (say, a relay that takes care of ETH to BNT conversions).
+ The ETH-BNT relay contains a smart token that connects ETH to BNT through
+ a smart token with a bonding curve as described before.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename fig/320/bancor-connector.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At the start, these two tokens are added to the reserves according to their
+ respective reserve ratios.
+ Since the sum of all the reserve ratios must be 1 for all of this to work,
+ these are often just set to 
+\begin_inset Formula $F_{\text{ETH}}=F_{\text{BNT}}=50\%$
+\end_inset
+
+ in Bancor).
+ A relay, therefore, defines the the bonding curve 
+\begin_inset Formula $P(S)$
+\end_inset
+
+ for both assets simultaneously as: 
+\begin_inset Formula 
+\[
+\left\{ \begin{aligned}P_{B}(S) & =\frac{R_{\text{BNT}}}{S\times F_{\text{BNT}}}\text{ BNT / ST}\\
+P_{E}(S) & =\frac{R_{\text{ETH}}}{S\times F_{\text{ETH}}}\text{ ETH / ST}
+\end{aligned}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $R_{\text{BNT}},R_{\text{ETH}}$
+\end_inset
+
+ are the current balances of BNT and ETH in the contract respectively, 
+\begin_inset Formula $S$
+\end_inset
+
+ the current total supply of the smart tokens reserve.
+ We can easily obtain the value of one ETH in BNT by dividing both quantities:
+ 
+\begin_inset Formula 
+\[
+\frac{P_{B}}{P_{E}}=\frac{R_{BNT}F_{\text{ETH}}}{R_{ETH}F_{\text{BNT}}}\text{ BNT/ETH}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example
+\series default
+: on May 17, 2021, the 
+\begin_inset CommandInset href
+LatexCommand href
+name "ETH-BNT relay"
+target "0xb1CD6e4153B2a390Cf00A6556b0fC1458C4A5533"
+literal "false"
+
+\end_inset
+
+had the following values inside of its smart contract
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Use 
+\begin_inset CommandInset href
+LatexCommand href
+name "SmartToken.totalSupply"
+target "https://etherscan.io/token/0xe5df055773bf9710053923599504831c7dbdd697\\#readContract"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset href
+LatexCommand href
+name "Converter.reserveBalances()"
+target "https://etherscan.io/address/0xab7ae646063087317c1f410c6661364779f87d73"
+literal "false"
+
+\end_inset
+
+and 
+\begin_inset CommandInset href
+LatexCommand href
+name "Converter.reserveWeight()"
+target "https://etherscan.io/address/0xab7ae646063087317c1f410c6661364779f87d73"
+literal "false"
+
+\end_inset
+
+to get these numbers.
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+ETH reserve: 80862470219510424417644 
+\end_layout
+
+\begin_layout Itemize
+BNT reserve: 43111821473433462889874866 
+\end_layout
+
+\begin_layout Itemize
+ETHBNT supply: 75596117361228700311720358 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $F_{\text{ETH-BNT}}=50\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Quote
+Therefore, one ETHBNT was worth: 
+\begin_inset Formula 
+\[
+\begin{aligned}P & \approx1.14015\text{ BNT}\\
+P & \approx0.002139\text{ ETH}
+\end{aligned}
+\]
+
+\end_inset
+
+Which implies that we could get approximately 533 BNT for 1 ETH.
+ This was indeed the case as at the time of writing ETH was priced at 6.4
+ dollars whereas ETH was priced at 3410 dollars.
+ 
+\end_layout
+
+\begin_layout Standard
+For more than two assets 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+, the bonding curves follow a similar pattern.
+ Assuming that the weights sum to one (
+\begin_inset Formula $\sum_{i}F_{i}\leq1$
+\end_inset
+
+), the reserve ratios must be: 
+\begin_inset Formula 
+\[
+P_{i}=\frac{R_{i}}{P_{i}\times F_{i}}
+\]
+
+\end_inset
+
+Pairwise prices can be derived by dividing the currencies using the same
+ logic as before.
+\end_layout
+
+\begin_layout Subsubsection
+Swapping dynamics
+\end_layout
+
+\begin_layout Standard
+When we buy a token from the relay (e.g., we buy ETH for BNT), we reduce the
+ reserve of that token in the smart contract 
+\begin_inset Formula $R_{\text{ETH}}$
+\end_inset
+
+, as well as the supply of the Smart Token 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ The counter-reserve of 
+\begin_inset Formula $R_{\text{BNT}}$
+\end_inset
+
+ remains unchanged.
+ According to our monetary policy, ETH has then become more expensive relative
+ to BNT (which has become inversely proportional more expensive to the increase
+ in supply).
+ This is best understood using an example.
+\end_layout
+
+\begin_layout Standard
+Consider for instance, that we start with a supply of 
+\begin_inset Formula $S=2000\text{ ST}$
+\end_inset
+
+ and reserves containing 
+\begin_inset Formula $R_{\text{ETH}}=100$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{\text{BNT}}=1000$
+\end_inset
+
+ and assume equal reserve ratios of 
+\begin_inset Formula $F=50\%$
+\end_inset
+
+.
+\begin_inset space \hspace{}
+\length 0pt
+\end_inset
+
+ The initial price of the reserve currency is then: 
+\begin_inset Formula 
+\begin{align*}
+\left\{ \begin{aligned}P_{B}(S) & =\frac{1000}{2000\times50\%}=1\text{ BNT / ST}\\
+P_{E}(S) & =\frac{100}{2000\times50\%}=0.1\text{ ETH / ST}
+\end{aligned}
+\right.\\
+\implies\frac{P_{B}}{P_{E}}=10\text{ BNT/ETH}
+\end{align*}
+
+\end_inset
+
+If we were to buy 1 ETH from the contract we reduce the reserve currency
+ as well as the smart token supply to obtain: 
+\begin_inset Formula 
+\begin{align*}
+\left\{ \begin{aligned}P_{B}(S) & =\frac{1000}{(2000-1)\times50\%}=1.0005\text{ BNT / ST}\\
+P_{E}(S) & =\frac{(100-1)}{(2000-1)\times50\%}=0.099\text{ ETH / ST}
+\end{aligned}
+\right.\\
+\implies\frac{P_{B}}{P_{E}}=10.1\text{ BNT/ETH}
+\end{align*}
+
+\end_inset
+
+Otherwise put, the action of buying 1 ETH from the smart contract indicates
+ to it that ETH is now more in demand.
+ Subsequently, the smart-contract has rebalanced its price slightly upward.
+\end_layout
+
+\begin_layout Section
+Bots, slippage, and fees
+\end_layout
+
+\begin_layout Standard
+When you are initiating a trade on a protocol like Bancor, Uniswap, Sushiswap,
+ Quickswap, etc, you will be presented with a screen like the one below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/320/tradingUI.png
+	width 100col%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Trading interface with slippage indicator
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We already understand how the basic quotation of a swap is calculated, but
+ as you can see it seems like this price is not necessarily guaranteed as
+ we have field for 
+\begin_inset Quotes eld
+\end_inset
+
+Minimum received
+\begin_inset Quotes erd
+\end_inset
+
+ which is 8 dollars lower than the quoted price! Similarly, if you were
+ to reverse this pair (buy ETH for USDC), you would see quite a spread on
+ the quoted price.
+ All this can seem a bit like magic, or perhaps even manipulation when you
+ start out so it's instructive to take a look at why these differences exist.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Slippage
+\emph default
+ is the difference between the expected price of a trade and the price at
+ which the trade is executed.
+ When you swap tokens on blockchain dapps as shown in the above screenshot,
+ you will typically be presented with a slippage tolerance level (0.2% in
+ the picture, but the default is typically around 0.5%).
+ The slippage tolerance tells the smart contract that you are willing to
+ accept trades that go up to 0.2% lower than what is being quoted in the
+ interface.
+ The good news is that you can set it to whichever number you want, the
+ bad news is that if you set it too low, your trade might not be executed
+ as the smart contract will work to ensure that you transaction either executes
+ as specified, or fails with error code: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+INSUFFICIENT_OUTPUT_AMOUNT
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ or similar.
+\end_layout
+
+\begin_layout Standard
+There are 4 sources of deviation from the theoretical price:
+\end_layout
+
+\begin_layout Enumerate
+Trading fees paid to the liquidity providers (fixed % loss).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Curve slippage 
+\end_layout
+
+\begin_layout Enumerate
+Volatility and liquidity of the currency being traded.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Liquidity of the pool (set slippage higher in times ).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Arbitrageurs trying to front-run trades.
+ 
+\end_layout
+
+\begin_layout Subsection
+Liquidity provider fees
+\end_layout
+
+\begin_layout Standard
+We will talk extensively about how to put your own capital into AMMs later,
+ but what's important for us here, is that there are people who put their
+ crypto into the smart contracts' reserves (
+\emph on
+liquidity providers
+\emph default
+).
+ Naturally, they want to see some return for the costs involved in parking
+ their capital (including 
+\emph on
+opportunity costs
+\emph default
+ and smart contract risks).
+ Trading fees range from 0.2-0.6% per trade on most platforms.
+ The liquidity provider fee is usually already priced-in into the quoted
+ price.
+\end_layout
+
+\begin_layout Subsection
+Curve slippage
+\end_layout
+
+\begin_layout Standard
+As we've discussed before, trading large amounts on the bonding curve results
+ in a potentially significant change in reserves which we need to average
+ out over to obtain the effective price.
+ An easy approximation here is to average out the before-and-after situation,
+ or you can integrate the result over the bonding curve like we did before.
+ For Bancor, the effective price of a trade is given by: 
+\begin_inset Formula 
+\[
+\begin{aligned}P & =\frac{\Delta A_{\text{out}}}{\Delta S}\\
+\Delta A_{\text{out}} & =S\left[\left(1+\frac{A_{\text{in}}}{R_{\text{in}}}\right)^{F_{\text{in}}}-1\right]\\
+\Delta S & =R\left[\sqrt[F]{\left(1+\frac{S_{\text{destroyed}}}{S}\right)}-1\right]
+\end{aligned}
+\]
+
+\end_inset
+
+Where 
+\begin_inset Formula $A_{\text{in}},A_{\text{out}}$
+\end_inset
+
+ are the amount of input and output tokens of the trade, and 
+\begin_inset Formula $S_{\text{destroyed}}$
+\end_inset
+
+ the amount of smart tokens burned in the process.
+ For a derivation of this result, see Rosenfeld 2017.
+ The smaller the liquidity of the pool that you are trading in, the larger
+ the effect of this source of slippage is.
+ If you are trading in very small pools, you are likely making substantial
+ dents in the reserves for every trade.
+ Therefore, you may have to split-up your orders and wait a long time for
+ reserves to go back to levels in between your orders to obtain an effective
+ price close to your initially quoted price.
+\end_layout
+
+\begin_layout Subsection
+Volatility & front-running
+\end_layout
+
+\begin_layout Standard
+Just like on traditional markets, you will likely face less reliable price
+ quotations when you are trading during a period of high volatility (e.g.,
+ after an important news came out, or during a bull run).
+ The reason is that the order of execution of trades is determined by how
+ much gas you pay for your order.
+ It is possible that someone else has paid more gas than you to execute
+ the same order, and therefore was placed first in line.
+ This could happen by accident, or on purpose by bots that are trying to
+ arbitrage your trade 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This is called 
+\emph on
+priority-gas auctioning
+\emph default
+, and it's crypto's equivalent of high-frequency flash trading.
+ It's usually executed by miners (Miner-Extractable Value) and is actively
+ being researched, see the following paper for an excellent review: https://arxi
+v.org/pdf/1904.05234.pdf.
+\end_layout
+
+\end_inset
+
+.
+ Your order will then be quoted after that other trade and likely be more
+ expensive.
+ The lower the average gas cost at the time of transaction, the higher the
+ impact of this effect (as there is likely more bot-activity).
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:bondingprice"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ right shows the effect of front-running on your trade.
+ The transaction that happened before you realized a price of 
+\begin_inset Formula $P_{1}$
+\end_inset
+
+ but your transaction - which happened afterwards - was priced at 
+\begin_inset Formula $P_{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+It is advisable that you avoid trading at such moments, especially in low-liquid
+ity pools.
+ If you must, you can:
+\end_layout
+
+\begin_layout Enumerate
+Split up your transaction into smaller trades to limit the amount of slippage
+ due to volatility of the order.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Set the slippage tolerance-level higher to ensure that your order can pass.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Set the gas cost high enough so that the order can pass through faster,
+ but bots can monitor your gas bid and still try to outbid you.
+ 
+\end_layout
+
+\begin_layout Standard
+Of course, every transaction costs money as well.
+ As you trade more, you will gain intuition for how to balance the above
+ three to figure out the most economical way to transact (though you shouldn't
+ shy away from a spreadsheet when in doubt!).
+\end_layout
+
+\begin_layout Section
+Overview of popular AMMs
+\end_layout
+
+\begin_layout Standard
+Once you understand Bancor, it's relatively easy to understand all the other
+ AMMs which evolved afterwards.
+ The two most important alternatives to know in the space are Uniswap and
+ Curve.
+ Uniswap is by far the most popular and currently has 10x the volume of
+ Bancor.
+ It evolved as an answer to the criticism that Bancor is inefficient, and
+ slow: exchanging through a couple of relays using an intermediary currency
+ is gas-intensive, and the white-listing / security check for tokens is
+ sluggish for a space that moves as quickly as DeFi.
+\end_layout
+
+\begin_layout Subsection
+Uniswap
+\end_layout
+
+\begin_layout Subsubsection
+The constant-product rule (invariant)
+\end_layout
+
+\begin_layout Standard
+The basic premise behind Uniswap is the 
+\emph on
+constant-product-rule
+\emph default
+ which states that all points in time, the reserves for two currencies (say,
+ 
+\begin_inset Formula $R_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{y}$
+\end_inset
+
+) in a pool should be equal to a constant 
+\begin_inset Formula $k$
+\end_inset
+
+ that is defined at the creation date of the pool: 
+\begin_inset Formula 
+\[
+\begin{aligned}k=R_{x}\times R_{y}\end{aligned}
+\]
+
+\end_inset
+
+The reserves can go up and down over time as trades happen to the exchange,
+ but no matter what happens 
+\begin_inset Formula $k$
+\end_inset
+
+ is kept constant at all times.
+ This is, of course, a special case of Bancor's bonding curve.
+ The implied price of x's to y's for small trades is: 
+\begin_inset Formula 
+\[
+P=\frac{R_{x}}{R_{y}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example
+\series default
+: At the time of writing the total Uniswap USDC-ETH pool contained 
+\begin_inset Formula $R_{y}=54,936,643\text{ million USDC}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{x}=14,556\text{ ETH}$
+\end_inset
+
+ .
+ Therefore, the price of ETH at that point in time was: 
+\begin_inset Formula 
+\[
+P=\frac{54,936,643\text{ USDC}}{14,556\text{ ETH}}\approx3774\text{ USDC/ETH}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Invariant Reserves
+\end_layout
+
+\begin_layout Standard
+The constant product formula can also be reversed to figure out what the
+ reserve price would be for an asset when the price 
+\begin_inset Formula $P$
+\end_inset
+
+ hits a certain level.
+ Assuming that there are no pathological scenarios like liquidity constraints,
+ the reserve values can be written in terms of the current price 
+\begin_inset Formula $P$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\begin{aligned}R_{x} & =\frac{k}{R_{y}}\\
+ & =\frac{k}{P\times R_{x}}\\
+ & =\sqrt{\frac{k}{P}}
+\end{aligned}
+\]
+
+\end_inset
+
+Similarly: 
+\begin_inset Formula 
+\[
+R_{y}=\sqrt{k\times P}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Example:
+\series default
+ we're trading ETH and USDC.
+ the pool started at a balance of 1,000 USD/ETH and contains 5,000 USDC
+ and 50 ETH: 
+\begin_inset Formula 
+\[
+\begin{aligned}R_{x} & =50\\
+R_{y} & =50,000\\
+k & =R_{x}\times R_{y}=2,500,000
+\end{aligned}
+\]
+
+\end_inset
+
+Over time, the price doubled to 2,000 USDC/ETH, therefore, the reserves
+ are now: 
+\begin_inset Formula 
+\begin{align*}
+R_{x} & =\sqrt{2,500,000/2,000}\approx35R_{y}\\
+ & =\sqrt{2,500,000\times2,000}\approx7071
+\end{align*}
+
+\end_inset
+
+We can confirm that 
+\begin_inset Formula $k$
+\end_inset
+
+ is indeed still 2,500,000 as required by the protocol.
+ 
+\end_layout
+
+\begin_layout Standard
+While all other dynamics are very similar to bancor, it's useful to talk
+ about the implied 
+\emph on
+invariant curve
+\emph default
+ of the above rule.
+ The constant multiplicative rule leads to the reserve schedule shown in
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:uniswapinvariant"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ At all points in time, the reserves must lie on the blue line.
+ That is, they must lie on the (reserve) 
+\emph on
+invariant curve
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/320/uniswap-invariant.png
+	width 100col%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uniswap's invariant curve
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:uniswapinvariant"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Swapping dynamics using the invariant
+\end_layout
+
+\begin_layout Standard
+If someone wants to swap x's to y's, that person will cause a shift in the
+ reserves (adding, say, 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ to 
+\begin_inset Formula $R_{x}$
+\end_inset
+
+ and removing 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+ from 
+\begin_inset Formula $R_{y}$
+\end_inset
+
+).
+ This shift leads to an 
+\emph on
+exchange rate
+\emph default
+ for the swap that is equal to: 
+\begin_inset Formula 
+\[
+\begin{aligned}P_{s} & =\frac{R_{y}'-R_{y}}{R_{x}'-R_{x}}\\
+ & =\frac{R_{y}+\Delta y-R_{y}}{R_{x}+\Delta x-R_{x}}\\
+ & =\frac{\Delta y}{\Delta x}
+\end{aligned}
+\]
+
+\end_inset
+
+We will calculate 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+ in the next section, but for now observe that this ratio is simply the
+ slope of the line that crosses the reserves before and after the trade
+ (indicated by a green line in the above plot).
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+implied price
+\emph default
+ P at a certain reserve level is then determined as the 
+\begin_inset Quotes eld
+\end_inset
+
+spot
+\begin_inset Quotes erd
+\end_inset
+
+ exchange rate, or, the rate that you would get by trading a really small
+ amount 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ (so small that it barely impacts the reserves).
+ This is, of course, just the derivative of the curve itself: 
+\begin_inset Formula 
+\[
+\begin{aligned}\lim_{\Delta x\rightarrow0}P_{s} & =\frac{\text{d}y}{\text{d}x}\\
+ & =\frac{\text{d}}{\text{d}x}\frac{k}{x}\\
+ & =\frac{k}{x^{2}}\\
+ & =\frac{y}{x}
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Buy and sell orders on Uniswap
+\end_layout
+
+\begin_layout Standard
+There are two ways to specify Uniswap orders: (a) you supply an exact amount
+ of input token 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+, and want as much 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+ as possible in return or (b) you supply as little as 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ possible to receive exactly The counter-amount received is calculated at
+ the price ratio 
+\emph on
+post-swap
+\emph default
+, but that differs depending on the case.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Case a: supplying 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ to receive as much 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+ as possible
+\end_layout
+
+\begin_layout Standard
+We supply exactly 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+, therefore, the reserves will increase to 
+\begin_inset Formula $R_{x}'Rr_{x}+\Delta x$
+\end_inset
+
+ The amount you will receive is: 
+\begin_inset Formula 
+\[
+\begin{aligned}(R_{x}R_{y}) & =(R_{x}+\Delta x)(R_{y}-\Delta y)\\
+ & \Downarrow\\
+\Delta y & =\Delta x\times\frac{R_{y}}{R_{x}+\Delta x}
+\end{aligned}
+\]
+
+\end_inset
+
+Note that in reality on top of that, a trading fee is added such that: 
+\begin_inset Formula 
+\[
+\begin{aligned}(R_{x}R_{y}) & =(R_{x}+\Delta x\cdot(1-f))(R_{y}-\Delta y)\\
+ & \Downarrow\\
+\Delta y & =(1-f)\cdot\Delta x\times\frac{R_{y}}{R_{x}+(1-f)\cdot\Delta x}
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+Example: assume no trading fees, a pool with 
+\begin_inset Formula $R_{x}=50\,\text{ETH}$
+\end_inset
+
+ and $ R_y=5,000 ,USDC$, you swap 
+\begin_inset Formula $s_{x}=2\,\text{ETH}$
+\end_inset
+
+ and receive: 
+\begin_inset Formula 
+\[
+s_{y}=\frac{2\times5000}{50+2}=192.31\,\text{USDC}
+\]
+
+\end_inset
+
+This is lower than the original ratio (200 USD/ETH vs 192.31 USD/ETH) 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Case b: supplying as little 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ as possible to receive exactly 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To receive exactly 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\begin{aligned}\Delta x & =\frac{\Delta y\times R_{x}}{R_{y}-\Delta y}+1\end{aligned}
+\]
+
+\end_inset
+
+
+\emph on
+TODO: explain this formula better
+\end_layout
+
+\begin_layout Subsection
+SushiSwap, PancakeSwap, QuickSwap, ...
+\end_layout
+
+\begin_layout Standard
+SushiSwap has been described as a scam, plagiarism, and even the world's
+ first legal billion dollar heist.
+ At the time of its creation, Uniswap was by far the largest exchange, but
+ the community was upset by the way Uniswap was distributing its value with
+ most of it going to VC funds and early investors as opposed to the users
+ themselves.
+ Thus, someone by the name of 
+\begin_inset Quotes eld
+\end_inset
+
+Chef Nomi
+\begin_inset Quotes erd
+\end_inset
+
+ decided to fork (copy) Uniswap, but make it more community-owned.
+ Original liquidity was stolen from Uniswap through a two-step 
+\emph on
+vampire-attack
+\emph default
+: (1) convince Uniswap liquidity providers to stake their 
+\emph on
+liquidity tokens
+\emph default
+ (Uniswap's smart tokens) into Sushiswap (2) convert the liquidity tokens
+ into Sushiswap-native ones.
+ After a turbulent and controversial history, it now stands shoulder-to-shoulder
+ to Uniswap in terms of liquidity.
+\end_layout
+
+\begin_layout Standard
+Other forks have popped-up and will likely continue to pop-up, including
+ Quickswap (on the Polygon L2), PancakeSwap (on BNB), etc.
+\end_layout
+
+\begin_layout Subsection
+Generalization
+\end_layout
+
+\begin_layout Standard
+The Uniswap invariant can be generalized to token pools with more than asset
+ as is done by the Balancer protocol.
+ In this case, the invariant becomes: 
+\begin_inset Formula 
+\[
+k=\prod R_{i}^{w_{i}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Stableswaps
+\end_layout
+
+\begin_layout Standard
+Stableswap protocols like Curve specialize in stablecoins.
+ If we were to blindly apply the constant-product invariant to a reserve
+ with a total starting value of 
+\begin_inset Formula $R$
+\end_inset
+
+ stablecoins and equal assets of every one of the 
+\begin_inset Formula $N$
+\end_inset
+
+ stablecoin, our product-invariant would be: 
+\begin_inset Formula 
+\[
+\left(\frac{R}{N}\right)^{N}=\prod_{\text{i=1}}^{N}R_{i}
+\]
+
+\end_inset
+
+While the model presented thus far works very well for most tokens, the
+ slippage that it introduces turned out to be prohibitively expensive for
+ stablecoins.
+ That is, swapping large amounts of stablecoins would often incur a price
+ deviation that is not justifiable given their stability.
+ It is intuitively clear that something close to 1 DAI = 1 USDC = 1 USDT,
+ etc should make more sense.
+ A more rigid expression could be a 
+\emph on
+constant-sum invariant
+\emph default
+, e.g.: 
+\begin_inset Formula 
+\[
+k=\sum R_{i}
+\]
+
+\end_inset
+
+But, this would simply set the price to 1 for every coin as 
+\begin_inset Formula $P=-\frac{\text{d }R_{i}}{\text{d}R_{j}}=1$
+\end_inset
+
+, regardless of the current reserve balances and chosen coins.
+ This is too rigid and would not properly adjust for other risks (like Tether
+ crashing, or someone emptying the reserves to arbitrage another protocol).
+ The invariant that curve therefore proposes is a mix between the constant-produ
+ct invariant and a constant-sum invariant: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f\sum_{i=1}^{N}x_{i}+\prod_{i=1}^{N}x_{i}=C
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $f$
+\end_inset
+
+ is a constant set by the protocol that determines how much importance is
+ given to constant price stability.
+ Thus, we obtaine a spectrum from constant pricing (
+\begin_inset Formula $f=\infty$
+\end_inset
+
+) to multiplicative pricing (
+\begin_inset Formula $m=0$
+\end_inset
+
+) (verify!).
+ The above equation can be rewritten to:
+\begin_inset Formula 
+\[
+AN^{N}\sum R_{i}+R=ARN^{N}+\frac{R^{N+1}}{N^{N}\prod R_{i}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A$
+\end_inset
+
+ is a constant related to 
+\begin_inset Formula $f$
+\end_inset
+
+ (for a derivation see the appendix, in the inital release, A was set to
+ 85 for pure stablecoin pools).
+ The implied curves are shown in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Note that the curve.fi logo is just a Klein bottle and not related to this
+ formula.
+\end_layout
+
+\end_inset
+
+.
+ Note how it mimicks the constant price curve in the beginning but becomes
+ less forgiving as we move further way along the curve.
+ Just like Bancor's bonding curve, this curve's rigidity can be customized
+ using parameter 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/320/uniswap-vs-curve-invariant.png
+	width 100col%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Curve's stableswap invariant lies closer to the 1-to-1 ratio and therefore
+ induces less slippage.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Uniswap v3.0
+\end_layout
+
+\begin_layout Standard
+T.B.A.
+\end_layout
+
+\begin_layout Subsection
+AMM aggregators
+\end_layout
+
+\begin_layout Standard
+While all of these AMMs are supposed to discover the real price eventually
+ due to arbitrage, it may be that there is some divergence at times.
+ Therefore, when you are doing your trades you may want to check aggregators
+ which aggregate liquidity from various platforms.
+ Two types exist:
+\end_layout
+
+\begin_layout Itemize
+Off-chain aggregators (1inch, paraswap) are flexible and can often trade
+ accross chains.
+ They require more trust from the user as the centralization of the server
+ router can lead to hard-to-detect front-running.
+\end_layout
+
+\begin_layout Itemize
+On-chain aggregators (swapswap) combine other liquidity providers fully
+ on-chain using smart contract logic.
+ They are transparent and unlikely to lead to front-running, but are not
+ as efficient in terms of gas.
+\end_layout
+
+\begin_layout Standard
+1inch, paraswap
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Subsection
+Bancor Price Derivation
+\end_layout
+
+\begin_layout Standard
+The original derivation is defined in Rosenfeld 2017, but we repeat it here
+ with our notation.
+ We consider a smart token ST with a total supply of 
+\begin_inset Formula $S$
+\end_inset
+
+ and underlying assets 
+\begin_inset Formula $R$
+\end_inset
+
+ of counter-currency ETH.
+ By definition, we know that these are related as follows: 
+\begin_inset Formula 
+\[
+P=\frac{R}{S\times F}
+\]
+
+\end_inset
+
+We are interested in knowing how an infinitesimal purchase of 
+\begin_inset Formula $\text{ d}S$
+\end_inset
+
+ tokens impacts the supply and price (negative values for 
+\begin_inset Formula $\text{ d}S$
+\end_inset
+
+ would represent a sale).
+ The user will pay 
+\begin_inset Formula $P\text{ d}S$
+\end_inset
+
+ for these tokens and shift the reserve by 
+\begin_inset Formula $\text{ d}R=P\text{ d}S$
+\end_inset
+
+.
+ Let us combine us with the above observation that R = PSF and therefore
+ 
+\begin_inset Formula $\text{ d}R=\text{ d}PSF$
+\end_inset
+
+ to obtain: 
+\begin_inset Formula 
+\[
+\begin{aligned}P\text{ d}S & =\text{ d}PSF\\
+ & =F(P\text{ d}S+S\text{ d}P)
+\end{aligned}
+\]
+
+\end_inset
+
+In the second step we observed that 
+\begin_inset Formula $F$
+\end_inset
+
+ is a constant and then applied the chain rule of derivatives.
+ Collect all 
+\begin_inset Formula $\text{d}S$
+\end_inset
+
+ on the left-hand side to obtain: 
+\begin_inset Formula 
+\[
+\begin{aligned}P\text{ d}S(1-F) & =FS\text{ d}P\\
+P\text{ d}S\left(\frac{1}{F}-1\right) & =S\text{ d}P
+\end{aligned}
+\]
+
+\end_inset
+
+We are getting close to our formula, let's replace 
+\begin_inset Formula $\alpha=\left(\frac{1}{F}-1\right)$
+\end_inset
+
+ and work towards integration: 
+\begin_inset Formula 
+\[
+\begin{aligned}\alpha P\text{ d}S & =FS\text{ d}P\\
+\alpha\frac{\text{ d}S}{S} & =F\frac{\text{ d}P}{P}\\
+\alpha\text{ d}\log S & =F\text{ d}\log P
+\end{aligned}
+\]
+
+\end_inset
+
+Where the last step applied the logarithmic rule of derivatives (
+\begin_inset Formula $\text{d}\log x=1/x$
+\end_inset
+
+).
+ Integrating both sides we obtain: 
+\begin_inset Formula 
+\[
+\begin{aligned}\int\alpha\text{ d}\log S=\int\text{d}\log P\\
+\alpha\log S+C=\log P
+\end{aligned}
+\]
+
+\end_inset
+
+for some constant 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ Exponentiating, we obtain that: 
+\begin_inset Formula 
+\[
+\begin{aligned}e^{C}S^{\alpha}=P\\
+P=\left(\frac{S}{S_{0}}\right)^{\alpha}P_{0}
+\end{aligned}
+\]
+
+\end_inset
+
+In the last step, we decomposed constant 
+\begin_inset Formula $e^{C}$
+\end_inset
+
+ into an initial price-to-supply ratio 
+\begin_inset Formula $P_{0}/S_{0}^{\alpha}$
+\end_inset
+
+.
+ The beauty of this latter formula is that it allows us to avoid difficult
+ integration which would be very costly to perform on the blockchain.
+\end_layout
+
+\begin_layout Subsection
+The Curve Invariant Function
+\end_layout
+
+\begin_layout Standard
+Curve combine the constant-product and the constant-sum invariants.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f\sum_{i=0}^{N}x_{i}+\prod_{i=0}^{N}x_{i}=C
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $f$
+\end_inset
+
+ is a mixing factor that determines how much linear we want to make our
+ function.
+ We always start with a uniform supply of all tokens.
+ The constant is determined with this supply and therefore:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f\sum_{i=0}^{N}x_{i} & =R\\
+\prod_{i=0}^{N}x_{i} & =\left(\frac{R}{N}\right)^{N}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Our initial formula is therefore:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f\sum_{i=0}^{N}x_{i}+\prod_{i=0}^{N}x_{i}=fR+\left(\frac{R}{N}\right)^{N}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This mix is awkward because the mixing parameter is not dimensionless, meaning,
+ it will function differently depending on how the reserves work out (the
+ sum-terms are linear, whereas the multiplicative ones are powers).
+ In order for interpretability and consistency, the smart-contracts and
+ the paper of Curve use an 
+\begin_inset Quotes eld
+\end_inset
+
+amplification factor
+\begin_inset Quotes erd
+\end_inset
+
+ instead, which is derived from 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f=\frac{A\prod x_{i}}{(R/N)^{N}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Substitution into the formule yields:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(R\frac{A\prod x_{i}}{(R/N)^{N}}\right)\sum_{i=0}^{N}x_{i}+\prod_{i=0}^{N}x_{i}=\left(R\frac{A\prod x_{i}}{(Q/N)^{N}}\right)R+\left(\frac{R}{N}\right)^{N}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Which can be simplified to:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+N^{N}A(\sum x_{i})+R=N^{N}AR+\frac{R^{N+1}}{N^{N}\prod x}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The final equation then becomes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+AN^{N}{\displaystyle \sum x_{i}+R=ARN^{N}+\frac{R}{N^{N}\prod x_{i}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Exercises
+\end_layout
+
+\begin_layout Quote
+Exercise: go back to the bonding curve for bitcoin, estimate its F-value.
+ 
+\end_layout
+
+\begin_layout Section
+Resources
+\end_layout
+
+\begin_layout Itemize
+https://miguelmota.com/blog/understanding-stableswap-curve/
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
