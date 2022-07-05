@@ -151,16 +151,16 @@ In traditional finance, there are two main modes in which credit is made
  These tend to be looser on requirements and therefore riskier.
  In peer-to-peer lending, all the capital needs to be available a priori.
  In both of these modes, the capital must be returned at predetermined periods
- of time together with ssome interest which can be constant (fixed), or
- depend on some external time-dependent factors (variable).
+ of time together with some interest which can be constant (fixed), or depend
+ on some external time-dependent factors (variable).
 \end_layout
 
 \begin_layout Standard
-Decentralized credit markets offer these functions on the blockchain, but
+Decentralized credit markets offer these functions on the blockchain but
  differ in that they typically require relatively large amounts of on-chain
- collateral to prove credit-worthiness.
+ collateral to prove creditworthiness.
  The reason is, of course, that borrowers tend to be anonymous and as a
- lender we want to avoid someone running off with the principal (the amount
+ lender, we want to avoid someone running off with the principal (the amount
  we lent them).
  Very few regulations exist and there is, therefore, no consumer protection.
  Interestingly, on-chain credit is typically perpetual - meaning that there
@@ -266,7 +266,7 @@ credit token
  At a later point in time, she can withdraw the principal plus the accrued
  interest by sending her cDAI tokens back to the smart contract.
  As the cDAI tokens are not tied to any one account, a saver can alternatively
- choose to sell the cDAI tokens on an token market as well (see next Chapter).
+ choose to sell the cDAI tokens on a token market as well (see next Chapter).
  Savers form the lifeblood of the credit markets as they are responsible
  for funding the reserves from which loans can be drawn.
 \end_layout
@@ -533,9 +533,9 @@ utilization
 status collapsed
 
 \begin_layout Plain Layout
-Note that we used the word market broadly here, but in this context it often
- means that we analyze and set parameters for just 1 token with its unique
- supply & demand characteristics.
+Note that we used the word market broadly here, but in this context, it
+ often means that we analyze and set parameters for just 1 token with its
+ unique supply & demand characteristics.
 \end_layout
 
 \end_inset
@@ -840,8 +840,8 @@ Choosing a platform
 \end_layout
 
 \begin_layout Standard
-Which platform is best depends on the use-case.
- Purely from an economic perspective you will want to shop around for the
+Which platform is best depends on the use case.
+ Purely from an economic perspective, you will want to shop around for the
  most profitable interest rates and lowest profit-taking platforms.
  In doing so, try to look at historical rates as interest rates can differ
  on a day-to-day basis or on weekly basis.
@@ -865,7 +865,7 @@ What it is
 \begin_layout Standard
 Flash loans are an extremely exciting technology in which anyone is allowed
  to (temporarily) loan astronomical amounts of assets as long as they manage
- to pay it back within the same transaction (using a smart contract).
+ to pay them back within the same transaction (using a smart contract).
  The process is simple:
 \end_layout
 
@@ -1034,7 +1034,7 @@ How to execute a Flash Loan
 \end_layout
 
 \begin_layout Standard
-Flash loans are a more advanced use-case as they require knowledge of Solidity.
+Flash loans are a more advanced use case as they require knowledge of Solidity.
  You write a smart-contract as shown in Algorithm
 \begin_inset space ~
 \end_inset
@@ -1049,13 +1049,13 @@ noprefix "false"
 
 \end_inset
 
- and then execute the code by sending a transaction to appropriate function
+ and then execute the code by sending a transaction to the appropriate function
  call in the contract.
  This is starting to change with 
 \begin_inset Quotes eld
 \end_inset
 
-nocode
+no-code
 \begin_inset Quotes erd
 \end_inset
 

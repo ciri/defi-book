@@ -17,7 +17,7 @@ The preliminary table-of-contents is as follows:
 | Section         | Chapter                                                      | Readiness |
 | --------------- | ------------------------------------------------------------ | --------- |
 |                 | [Prologue](https://github.com/ciri/defi-book/blob/main/pdf/010-Prologue.pdf) | ✓         |
-| Foundations     | Origins                                                      |           |
+| Foundations     | [Origins](https://github.com/ciri/defi-book/blob/main/pdf/110-Origins.pdf) | ✓         |
 |                 | Blockchain Technology                                        |           |
 |                 | Ethereum                                                     |           |
 | Crypto-Assets   | Introduction to DeFi                                         |           |
