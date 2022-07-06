@@ -14,29 +14,29 @@ This book was originally intended as an introductory text for upper undergraduat
 
 The preliminary table-of-contents is as follows:
 
-| Section         | Chapter                                                      | Readiness |
-| --------------- | ------------------------------------------------------------ | --------- |
-|                 | [Prologue](https://github.com/ciri/defi-book/blob/main/pdf/010-Prologue.pdf) | ✓         |
-| Foundations     | [Origins](https://github.com/ciri/defi-book/blob/main/pdf/110-Origins.pdf) | ✓         |
-|                 | Blockchain Technology                                        |           |
-|                 | Ethereum                                                     |           |
-| Crypto-Assets   | Introduction to DeFi                                         |           |
-|                 | [Fungible Tokens](https://github.com/ciri/defi-book/blob/main/pdf/220-Fungible-Tokens.pdf) | ✓         |
-|                 | [Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/230-Stablecoins.pdf) | ✓         |
-|                 | [Algorithmic Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/240-AlgorithmicStablecoins.pdf) | ✓         |
-|                 | Crowdfunding                                                 |           |
-| Applications    | [Credit Markets](https://github.com/ciri/defi-book/blob/main/pdf/310-Credit-Markets.pdf) | 90%       |
-|                 | [Automated Market Makers](https://github.com/ciri/defi-book/blob/main/pdf/320-AMM.pdf) | ✓         |
-|                 | Liquidity Mining & Yield Farming                             |           |
-|                 | Perpetuals                                                   |           |
-| NFT             | Non-Fungible Tokens                                          |           |
-|                 | IPFS                                                         |           |
-| Selected Topics | Layer 2 Solutions                                            |           |
-|                 | Bots and Arbitrage                                           |           |
-|                 | The Cryptography behind Blockchain                           |           |
-|                 | Hashing Functions  in Blockchain                             |           |
-|                 | Solidity Basics                                              |           |
-|                 | Tradition Finance Review                                     |           |
+| Section         | Chapter                                                      | Readiness     |
+| --------------- | ------------------------------------------------------------ | ------------- |
+|                 | [Prologue](https://github.com/ciri/defi-book/blob/main/pdf/010-Prologue.pdf) | ✓             |
+| Foundations     | [Origins](https://github.com/ciri/defi-book/blob/main/pdf/110-Origins.pdf) | ✓             |
+|                 | Blockchain Technology                                        | (in progress) |
+|                 | [Ethereum](https://github.com/ciri/defi-book/blob/main/pdf/130-Ethereum.pdf) | 80%           |
+| Crypto-Assets   | Introduction to DeFi                                         |               |
+|                 | [Fungible Tokens](https://github.com/ciri/defi-book/blob/main/pdf/220-Fungible-Tokens.pdf) | ✓             |
+|                 | [Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/230-Stablecoins.pdf) | ✓             |
+|                 | [Algorithmic Stablecoins](https://github.com/ciri/defi-book/blob/main/pdf/240-AlgorithmicStablecoins.pdf) | ✓             |
+|                 | Crowdfunding                                                 |               |
+| Applications    | [Credit Markets](https://github.com/ciri/defi-book/blob/main/pdf/310-Credit-Markets.pdf) | 90%           |
+|                 | [Automated Market Makers](https://github.com/ciri/defi-book/blob/main/pdf/320-AMM.pdf) | ✓             |
+|                 | Liquidity Mining & Yield Farming                             | (in progress) |
+|                 | Perpetuals                                                   |               |
+| NFT             | Non-Fungible Tokens                                          | (in progress) |
+|                 | IPFS                                                         |               |
+| Selected Topics | Layer 2 Solutions                                            |               |
+|                 | Bots and Arbitrage                                           |               |
+|                 | The Cryptography behind Blockchain                           | (in progress) |
+|                 | Hashing Functions  in Blockchain                             | (in progress) |
+|                 | Solidity Basics                                              | (in progress) |
+|                 | Tradition Finance Review                                     | (in progress) |
 
 In general: 
 
@@ -48,7 +48,7 @@ In general:
 
 ### Making edits
 
-We use [LyX](https://www.lyx.org/), a cross-platform document editor which transpiles to TeX. Once you have downloaded the github files, open up any of the relevant chapters in the /src directory in LyX.
+We use [LyX](https://www.lyx.org/), a cross-platform document editor which transpiles to TeX, the final result is created automatically using XeTeX. You don't actually need to have a functioning LaTeX set-up on your computer to make edits. Once you have downloaded the github files, open up any of the relevant chapters in the /src directory in LyX and you can start editing.
 
 ### Commiting
 

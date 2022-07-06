@@ -1,0 +1,1362 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass template/fancymemoir
+\begin_preamble
+% Lyx stuff
+\input{template/lyx.tex}
+% Graphics/figure captions
+\input{template/gfx.tex}
+%Math and font selection
+\input{template/fonts.tex}
+%SQL/verbatim/code formatting
+\input{template/codeformat.tex}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8-cjk
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\font_cjk gkai
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{chapter}{2} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Ethereum
+\end_layout
+
+\begin_layout Standard
+In 2013, then 19-year-old Vitalik Buterin published a white paper containing
+ the specification of Ethereum, a new and improved blockchain.
+ Ethereum contains a fully-fledged Turing-complete programclucnkyming language.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Contracts
+\begin_inset Quotes erd
+\end_inset
+
+ are programmed to encode arbitrary state transition functions on the blockchain.
+ Vitalik dropped out of the University of Waterloo after gaining a Thiel
+ Fellowship of 100K USD.
+ Soon after, he raised 18 million USD to support the development of Ethereum.
+ By 2015, Ethereum had launched and it has been growing ever since.
+ At the time of writing the market capitalization of its native cryptocurrency
+ has crossed 15 billion USD.
+\end_layout
+
+\begin_layout Section
+Ether
+\end_layout
+
+\begin_layout Standard
+The native cryptocurrency of Ethereum is called Ether (symbol ETH or Ξ).
+ It is similar to Bitcoin in that it can be transferred to other people
+ or kept as a store of value.
+ At the time of writing 1 ETH is worth about USD$136.
+ Even so, its purpose is different: if Bitcoin is digital gold, ether is
+ more like digital oil.
+\end_layout
+
+\begin_layout Standard
+Ether is designed to fuel the network and incentivize people to share their
+ disk space and computing time with the blockchain.
+ When a user makes a transfer or wants to do a computation, she pays the
+ miners Ether to compensate them for their resource consumption.
+ In a similar vein, when developers build software that uses shared disk
+ space, it will demand Ether to store data.
+\end_layout
+
+\begin_layout Standard
+As an operation consumes resources, it uses up units of 
+\series bold
+gas
+\series default
+.
+ Similar to Bitcoin's transaction fee, we must specify at which price we
+ value the gas that we will use (the 
+\series bold
+gas price
+\series default
+).
+ This is usually expressed in small denominations of Ether called Gwei:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="4">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="none" valignment="top" special="@{}l">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top">
+<column alignment="none" valignment="top" special="l@{}">
+<row endhead="true">
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Unit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Short
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Ether
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(wei)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{-18}$
+\end_inset
+
+ ETH
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+KWei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(babbage)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{3}$
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0pt
+\end_inset
+
+ wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{-15}$
+\end_inset
+
+ ETH
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mwei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(lovelace)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{6}$
+\end_inset
+
+ wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{-12}$
+\end_inset
+
+ ETH
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gwei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(shannon)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{9}$
+\end_inset
+
+ wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{-9}$
+\end_inset
+
+ ETH
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Twei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(szabo)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{12}$
+\end_inset
+
+ wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{-6}$
+\end_inset
+
+ ETH
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pwei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(finny)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{15}$
+\end_inset
+
+ wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{-3}$
+\end_inset
+
+ ETH
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ether
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(buterin)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{18}$
+\end_inset
+
+ wei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 ETH
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Setting a high price will ensure that your transaction will be moved to
+ the front of the queue.
+ Since we are executing variable computer programs on the blockchain, it
+ is often not trivial to guess how many operations/units of gas a program
+ will cost.
+ A user must, however, set an upper limit (the 
+\series bold
+gas limit
+\series default
+) of the amount of total gas she is willing to pay for an operation to succeed.
+ This avoids unpleasant surprises where a program gets stuck and uses enormous
+ amounts of gas, costing the user a fortune.
+ The maximum amount of money ever spent on a transaction is: 
+\begin_inset Formula 
+\[
+\text{Fee}=\text{GasPrice}\times\text{GasLimit}
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Ethereum as a global computer
+\end_layout
+
+\begin_layout Standard
+As with Bitcoin, the Ethereum blockchain consists of nodes and mining computers
+ connected together that make up the blockchain.
+ When a user creates a transaction to interact with the blockchain, that
+ transaction must contain ether and can optionally also include data/code
+ to be run.
+ That code could be a fully-fledged piece of software or, more often, a
+ 
+\begin_inset Quotes eld
+\end_inset
+
+call
+\begin_inset Quotes erd
+\end_inset
+
+ (command to execute) to another piece of code that was placed on the blockchain
+ earlier by someone else.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/130/whatisethereum.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Users interact with the blockchain which contains data about virtual assets
+ such as cryptocurrencies and code (smart contracts) which can act upon
+ the assets.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:registry-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Ethereum Virtual Machine
+\end_layout
+
+\begin_layout Standard
+When a user calls a piece of code, that code is run by the computers on
+ the blockchain and the resulting state transition (e.g., a transfer of assets)
+ is recorded on the blockchain.
+ The Ethereum blockchain is, in essence, therefore one large clunky virtual
+ machine.
+ It is inefficient in that the computations are repeated by various devices
+ in parallel so you would not want to use it to run games.
+ Instead, you want to use it for computations that require trustworthiness,
+ traceability, transparency, and uncensorableness.
+ This makes Ethereum software ideal for anything related to the management
+ of assets, whether those assets are digital currencies, art, licenses,
+ or anything else that can be represented digitally.
+\end_layout
+
+\begin_layout Subsection
+Smart Contracts
+\end_layout
+
+\begin_layout Subsubsection
+What it is
+\end_layout
+
+\begin_layout Standard
+An 
+\begin_inset Quotes eld
+\end_inset
+
+off-chain
+\begin_inset Quotes erd
+\end_inset
+
+ contract is a written or spoken agreement that is intended to be enforceable
+ by law.
+ It requires a trusted entity such as a lawyer or a judge.
+ More often than not, it requires good faith in the person you are interacting
+ with as going to court is a lengthy and costly process in most countries.
+ Let us look at the definition of smart contracts (as envisioned by Nick
+ Szabo in ``The Idea of Smart Contracts'' long before Ethereum was created):
+\end_layout
+
+\begin_layout Quote
+A smart contract is a 
+\series bold
+computerized transaction protocol that executes the terms of a contract
+\series default
+.
+ The general objectives are to satisfy common contractual conditions (such
+ as payment terms, liens, confidentiality, and even enforcement), 
+\series bold
+minimize exceptions
+\series default
+ both malicious and accidental, and 
+\series bold
+minimize the need for trusted intermediaries
+\series default
+.
+ Related economic goals include lowering fraud.
+ 
+\end_layout
+
+\begin_layout Standard
+In short, a smart contract is code that facilitates, verifies, or enforces
+ the negotiation or execution of a digital contract.
+ It executes automatically when certain conditions or actors trigger it.
+ When routines in the smart contract are executed it can interact with other
+ contracts, store ether, or send ether.
+\begin_inset space ~
+\end_inset
+
+Smart contracts are programmed using specialized programming languages such
+ as Solidity and Vyper.
+ Similar to regular software, they must be compiled to EVM bytecode (machine-rea
+dable code).
+ This bytecode (the program) can be placed on the distributed ledger.
+ From that point onward, people or other smart contracts can interact with
+ the program by sending transactions to it.
+\end_layout
+
+\begin_layout Subsubsection
+Example
+\end_layout
+
+\begin_layout Standard
+In the following example, we are going to build a name registry.
+ That is, we are going to associate names with Ethereum addresses so that
+ we can transfer Eth or other assets to that name instead of a long and
+ complicated hexadecimal Ethereum wallet address.
+ This is similar to how we do not write IP addresses (e.g., 2a00:1450:400e:80e::20
+0e) when we visit websites.
+ Instead, we visit their domain names (e.g., google.com).
+ A simple example of a smart contract implementing this idea is shown in
+ Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:algorithm1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, it is written in Solidity
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Note that this code is not secure and you shouldn't use this for production
+ purposes!
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+pragma solidity ^0.5.0; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+contract MyRegistry { 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	// storage on the Ethereum blockchain
+\end_layout
+
+\begin_layout Plain Layout
+
+	mapping( string => address ) public registry; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	function registerDomain(string memory domain, address target) public {
+ 		
+\end_layout
+
+\begin_layout Plain Layout
+
+		//Can only reserve new unregistered domain names
+\end_layout
+
+\begin_layout Plain Layout
+
+		require(registry[domain] == address(0));	
+\end_layout
+
+\begin_layout Plain Layout
+
+		// Update the registry
+\end_layout
+
+\begin_layout Plain Layout
+
+		registry[domain] = target;
+\end_layout
+
+\begin_layout Plain Layout
+
+	} 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A registry smart contract written in Solidity.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:algorithm1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Don't worry if you don't understand exactly what this does yet - our goal
+ here is not to become solidity programmers (yet!).
+ The main use-case is shown in the procedure in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:registry"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig/130/registry.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A registry smart contract and its usage.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:registry"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+First, the smart contract as shown before is created (uploaded) using a
+ special transaction to the Ethereum blockchain by the developer.
+ Notice how the third line declares that this is indeed a smart contract,
+ followed by its specification.
+ Upon deployment, the smart contract gets its own unique Ethereum address
+ which can be used to reference it.
+ Reading the next lines of the contract, we see that the contract contains
+ a 
+\begin_inset Quotes eld
+\end_inset
+
+registry
+\begin_inset Quotes erd
+\end_inset
+
+ which represents a list of strings (e.g., 
+\begin_inset Quotes eld
+\end_inset
+
+myname.eth
+\begin_inset Quotes erd
+\end_inset
+
+) and maps those to addresses (e.g., 0x1439..).
+ This registry will be stored in the blockchain itself and can be written
+ to through the registerDomain() function by any user.
+ Upon doing so, the code then proceeds to update the registry to include
+ the registered address.
+ From that point onward, any user can inspect the registry and find the
+ entry that was added.
+\end_layout
+
+\begin_layout Section
+Web3
+\end_layout
+
+\begin_layout Standard
+Smart-contract technology is arguably one of the most important computing
+ innovations since the advent of the internet.
+ We call the infusion of smart contract technology on top of the internet
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+Web3
+\begin_inset Quotes erd
+\end_inset
+
+ because it enables new applications thereby heralding a third generation
+ of the world-wide-web.
+ Let us take a step back first to see why this is so significant to warrant
+ its own designated era.
+\end_layout
+
+\begin_layout Standard
+The world-wide-web is enabled by the internet which itself emerged out of
+ a combination of technologies - over 40 years in the making by academics
+ and military researchers.
+ The vast majority of protocols that underly the internet are open and freely
+ usable by anyone with a technical background (e.g., UDP, TCP/IP).
+ This open-source mindset is partly what enabled Tim Berners Lee to build
+ upon these base technologies to design what would eventually become the
+ first world-wide-web (web 1.0, the HTTP, and HTML protocols) while working
+ for CERN in Austria around 1990.
+ A kindred mind, Tim too choose the open-source paradigm and this, in turn,
+ ensured an even-level playing field for anyone willing to experiment with
+ the www (i.e., no one company controlled it).
+ Arguably, this helped contributed to it becoming the most successful and
+ quickly adopted technology to date in humankind.
+ 
+\end_layout
+
+\begin_layout Standard
+During the mid-2000s, Web 2.0 emerged.
+ Now, users are no longer just consumers of information, but also start
+ producing information (e.g., by uploading blog posts or videos).
+ During Web 2.0 large for-profit technology companies emerged which amassed
+ incredible power through the creation of internet-enabled platforms.
+ These platforms are essentially websites or apps which connect users with
+ each other or with service providers (e.g., Google, Facebook, Amazon, ...).
+ While such centralization of services yields benefits due to economies
+ of scale and specialization, it also runs counter to the original open
+ philosophy of the internet.
+ Unless these platforms are able to sell you products directly, they are
+ mostly monetizing their services by selling your data to a.o.
+ advertizers.
+ Within such surveillance capitalism, there are high incentives for monopolistic
+ structures to emerge and remain closed (not share data, or protocols).
+ To protect their status, these monopolies will buy out any threats to their
+ status at high valuations.
+ This is a classical pattern in business and leads to a stifling of innovation
+ as is evident by the slow-down in innovation on the web as well.
+ Content producers who (necessarily) decide to conform and work with existing
+ platforms are at risk of the changing rules set out by the incumbents.
+ For instance, it is not unheard of for Youtube content creators to suddenly
+ get banned thereby losing their entire business.
+ Similarly, Facebook, Apple, or Google changing rates on their app stores
+ could very well mean the death of companies who develop and sell through
+ them.
+\end_layout
+
+\begin_layout Standard
+The defining property of Web3 is that intermediary platforms are (mostly)
+ bypassed in favor of decentralization.
+ It is much more a design philosophy rather than one particular technology
+ or application itself but it is more easily understood by giving an example.
+ The clearest win for society is the Creator Economy that Web3 unlocks.
+ Instead of needing, say, Youtube with its ads, content creators (artists,
+ developers, djs, musicians, writers, ...) can connect directly with their
+ supporters.
+ The digital content that they create can be programmed (using smart contracts
+ like NFTs) such that they have full control over the terms that they set
+ without being beholden to corporate contracts.
+ It also unlocks innovative incentivization schemes as is shown in the next
+ example.
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Resale Royalty
+\series default
+ A popular blockchain-enabled commission structure allows the artists to
+ gain from resales as opposed to just the initial sales.
+ This can be very impactful for young creators who necessarily command low
+ initial sales prices.
+ In 2018, then 21-year-old Robbie Barrat sold his digital artwork for a
+ mere $176.
+ In 2021, it was resold for 100 Ethereum earning him a whopping $11,031
+ commission in the process
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Transaction 0xe78acb5f60978fc4903d2f75fc9ba58d67e76a0730201cfb755aeda91826ef0e
+\end_layout
+
+\end_inset
+
+.
+ Enforcing such a structure in the physical world is a difficult problem.
+\end_layout
+
+\begin_layout Standard
+For users, buying an audio file from an artist directly not only ensures
+ that they are being supported the most, moreover it  means that users are
+ allowed to do with the music as they please (transfer, resell, showcase
+ in a real or virtual home, ...).
+ Contrast this with something like iTunes where you can only use your purchased
+ songs within Apple's proprietary ecosystem, being barred from reselling,
+ transferring, or lending them out.
+ In line with an open philosophy, Web3's decentralization benefits the creators,
+ and the consumers at the expense of intermediaries who arguably provide
+ less value to the table.
+ When you port these ideas to other industries like real estate, gaming,
+ etc you start to get an idea of how impactful the concept of Web3 really
+ can be.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+WWW
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Web 2.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Web3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Economy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Information Economy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Platform Economy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Token Economy
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Characteristics
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Read-Only
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Read/Write
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Read/Write/Execute
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Monetization
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Offline
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ads, Selling Products
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Token Model
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Payments
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Offline
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Credit Cards, Paypal
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ethereum, Blockchain, ..
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Key characteristics of different versions of the world-wide-web.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Section
+References
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
